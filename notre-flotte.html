@@ -1,0 +1,1509 @@
+﻿<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Notre Flotte — Mercedes Classe V | Black V Prestige</title>
+  <meta name="description" content="Découvrez la flotte Black V Prestige : Mercedes Classe V 2024 full options, ciel étoilé, 7 passagers. Service de chauffeur privé haut de gamme 24h/24, France entière.">
+  <meta name="keywords" content="flotte chauffeur privé, Mercedes Classe V, van premium, véhicule luxe, transport haut de gamme">
+  <link rel="canonical" href="https://www.blackvprestige.fr/notre-flotte/">
+  <meta property="og:title" content="Notre Flotte — Black V Prestige">
+  <meta property="og:description" content="Mercedes Classe V 2024 full options. Chauffeur privé haut de gamme 24h/24, France entière.">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
+  <link rel="stylesheet" href="assets/css/style.css">
+
+  <style>
+    /* ============================================================
+       NOTRE FLOTTE — STYLES SPÉCIFIQUES
+       ============================================================ */
+
+    /* ── HERO FLOTTE ── */
+    .fleet-hero {
+      position: relative;
+      min-height: 62vh;
+      display: flex;
+      align-items: flex-end;
+      padding: 150px 0 80px;
+      overflow: hidden;
+      background: var(--black-lux);
+    }
+    .fleet-hero__bg {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+    .fleet-hero__bg-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.32;
+    }
+    .fleet-hero__bg-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg,
+        rgba(7,7,7,0.65) 0%,
+        rgba(7,7,7,0.45) 40%,
+        rgba(7,7,7,0.92) 100%);
+    }
+    .fleet-hero__inner {
+      position: relative;
+      z-index: 2;
+    }
+    .fleet-hero__title {
+      font-family: var(--font-serif);
+      font-size: clamp(2.2rem, 4.5vw, 4rem);
+      font-weight: 500;
+      line-height: 1.08;
+      letter-spacing: -0.02em;
+      color: var(--white);
+      margin: 22px 0 18px;
+      max-width: 760px;
+    }
+    .fleet-hero__sub {
+      font-size: 0.92rem;
+      font-weight: 300;
+      color: var(--text-dark-sec);
+      line-height: 1.8;
+      max-width: 500px;
+    }
+    .fleet-hero__meta {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      flex-wrap: wrap;
+      margin-top: 36px;
+    }
+    .fleet-hero__badge {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.62rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.65);
+    }
+    .fleet-hero__badge-line {
+      width: 18px;
+      height: 1px;
+      background: var(--champagne);
+      flex-shrink: 0;
+    }
+
+    /* ── FILTER BAR ── */
+    .fleet-filters-wrap {
+      background: var(--white);
+      border-bottom: 1px solid var(--border-light);
+      position: sticky;
+      top: 62px;
+      z-index: 500;
+    }
+    .fleet-filters {
+      display: flex;
+      align-items: stretch;
+      overflow-x: auto;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+    }
+    .fleet-filters::-webkit-scrollbar { display: none; }
+    .fleet-filter-btn {
+      flex-shrink: 0;
+      padding: 19px 28px;
+      font-family: var(--font-sans);
+      font-size: 0.67rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      background: none;
+      border: none;
+      border-bottom: 2px solid transparent;
+      cursor: pointer;
+      transition: color var(--t-fast), border-color var(--t-fast);
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      white-space: nowrap;
+    }
+    .fleet-filter-btn:hover { color: var(--text-primary); }
+    .fleet-filter-btn.active {
+      color: var(--text-primary);
+      border-bottom-color: var(--black-deep);
+    }
+    .fleet-filter-count {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 18px;
+      height: 18px;
+      padding: 0 4px;
+      background: var(--grey-soft);
+      border-radius: 20px;
+      font-size: 0.57rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      transition: background var(--t-fast), color var(--t-fast);
+    }
+    .fleet-filter-btn.active .fleet-filter-count {
+      background: var(--black-deep);
+      color: var(--white);
+    }
+
+    /* ── FLEET GRID SECTION ── */
+    .fleet-grid-section {
+      padding: 64px 0 96px;
+    }
+    .fleet-grid-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 40px;
+    }
+    .fleet-grid-header-left {}
+    .fleet-visible-txt {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      letter-spacing: 0.08em;
+    }
+    .fleet-visible-txt strong {
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+    .fleet-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 28px;
+    }
+    .fleet-card { display: none; } /* hidden by default; JS sets display:flex */
+    .fleet-card.visible {
+      display: flex;
+      flex-direction: column;
+      border: 1px solid var(--border-light);
+      background: var(--white);
+      overflow: hidden;
+      transition: box-shadow var(--t-mid), transform var(--t-mid);
+      animation: cardIn 0.4s ease both;
+    }
+    @keyframes cardIn {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .fleet-card.visible:hover {
+      box-shadow: 0 16px 56px rgba(0,0,0,0.1);
+      transform: translateY(-5px);
+    }
+
+    /* Card media */
+    .fleet-card__media {
+      position: relative;
+      aspect-ratio: 16/10;
+      overflow: hidden;
+    }
+    .fleet-card__img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.75s cubic-bezier(0.4,0,0.2,1);
+    }
+    .fleet-card.visible:hover .fleet-card__img {
+      transform: scale(1.06);
+    }
+    .fleet-card__img-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 45%, rgba(0,0,0,0.45) 100%);
+      pointer-events: none;
+    }
+    .fleet-card__badge {
+      position: absolute;
+      top: 18px;
+      left: 18px;
+      font-size: 0.57rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--black-deep);
+      background: rgba(255,255,255,0.90);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      padding: 5px 13px;
+      border-radius: 2px;
+    }
+    .fleet-card__badge--dark {
+      background: rgba(10,10,10,0.65);
+      color: rgba(255,255,255,0.85);
+    }
+
+    /* Coming-soon overlay */
+    .fleet-card--coming .fleet-card__media::after {
+      content: 'Prochainement';
+      position: absolute;
+      inset: 0;
+      background: rgba(7,7,7,0.58);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-serif);
+      font-size: 1.45rem;
+      font-style: italic;
+      font-weight: 400;
+      color: rgba(255,255,255,0.8);
+      letter-spacing: 0.04em;
+      backdrop-filter: blur(2px);
+      -webkit-backdrop-filter: blur(2px);
+    }
+
+    /* Card body */
+    .fleet-card__body {
+      padding: 30px 30px 26px;
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+      flex: 1;
+    }
+    .fleet-card__name {
+      font-family: var(--font-serif);
+      font-size: 1.55rem;
+      font-weight: 500;
+      color: var(--text-primary);
+      line-height: 1.2;
+      margin-bottom: 5px;
+    }
+    .fleet-card--coming .fleet-card__name { color: var(--text-muted); }
+    .fleet-card__tagline {
+      font-size: 0.7rem;
+      font-weight: 400;
+      color: var(--text-muted);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    /* Specs strip */
+    .fleet-card__specs {
+      display: flex;
+      border-top: 1px solid var(--border-light);
+      border-bottom: 1px solid var(--border-light);
+    }
+    .fleet-spec-item {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      padding: 14px 8px;
+      text-align: center;
+      border-right: 1px solid var(--border-light);
+    }
+    .fleet-spec-item:last-child { border-right: none; }
+    .fleet-card--coming .fleet-card__specs { opacity: 0.38; }
+    .fleet-spec-icon {
+      width: 18px;
+      height: 18px;
+      color: var(--chrome);
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 1.5;
+    }
+    .fleet-spec-val {
+      font-family: var(--font-serif);
+      font-size: 1.2rem;
+      font-weight: 500;
+      color: var(--text-primary);
+      line-height: 1;
+    }
+    .fleet-spec-lbl {
+      font-size: 0.58rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    /* Features chips */
+    .fleet-card__features {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 7px 14px;
+    }
+    .fleet-card--coming .fleet-card__features { opacity: 0.35; }
+    .fleet-feat-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.74rem;
+      color: var(--text-secondary);
+      font-weight: 400;
+    }
+    .fleet-feat-item::before {
+      content: '';
+      width: 12px;
+      height: 1px;
+      background: var(--champagne);
+      flex-shrink: 0;
+    }
+
+    /* CTA row */
+    .fleet-card__cta {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: auto;
+    }
+    .fleet-card__cta .btn { font-size: 0.63rem; padding: 11px 22px; }
+    .fleet-card--coming .fleet-card__cta .btn {
+      opacity: 0.3;
+      pointer-events: none;
+      cursor: not-allowed;
+    }
+
+    /* ── VEHICLE SHOWCASE ── */
+    .fleet-showcase {
+      background: var(--black-lux);
+      padding: 100px 0;
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+    .fleet-showcase__header {
+      text-align: center;
+      margin-bottom: 72px;
+    }
+    .fleet-showcase__inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    /* Gallery */
+    .fleet-showcase__gallery { position: sticky; top: 120px; }
+    .fleet-showcase__main-wrap {
+      position: relative;
+      aspect-ratio: 4/3;
+      overflow: hidden;
+      border-radius: var(--radius-md);
+      border: 1px solid rgba(255,255,255,0.06);
+      margin-bottom: 10px;
+    }
+    .fleet-showcase__main-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: opacity 0.35s ease;
+    }
+    .fleet-showcase__thumbs {
+      display: grid;
+      grid-template-columns: repeat(4,1fr);
+      gap: 8px;
+    }
+    .fleet-thumb {
+      aspect-ratio: 4/3;
+      object-fit: cover;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      opacity: 0.45;
+      border: 1px solid transparent;
+      transition: opacity var(--t-fast), border-color var(--t-fast);
+      display: block;
+      width: 100%;
+    }
+    .fleet-thumb.active,
+    .fleet-thumb:hover { opacity: 1; border-color: var(--champagne); }
+
+    /* Content */
+    .fleet-showcase__content {}
+    .fleet-showcase__title {
+      font-family: var(--font-serif);
+      font-size: clamp(1.9rem, 3vw, 2.8rem);
+      font-weight: 500;
+      color: var(--white);
+      line-height: 1.1;
+      margin: 16px 0 10px;
+    }
+    .fleet-showcase__title em { color: var(--champagne); }
+    .fleet-showcase__desc {
+      font-size: 0.88rem;
+      font-weight: 300;
+      line-height: 1.9;
+      color: var(--text-dark-sec);
+      margin-bottom: 36px;
+    }
+
+    /* Specs grid */
+    .fleet-showcase__specs {
+      display: grid;
+      grid-template-columns: repeat(3,1fr);
+      gap: 1px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      margin-bottom: 40px;
+    }
+    .showcase-spec {
+      padding: 20px 14px;
+      background: var(--black-lux);
+      text-align: center;
+    }
+    .showcase-spec__val {
+      display: block;
+      font-family: var(--font-serif);
+      font-size: 1.45rem;
+      font-weight: 500;
+      color: var(--white);
+      margin-bottom: 4px;
+      line-height: 1;
+    }
+    .showcase-spec__lbl {
+      font-size: 0.58rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-dark-muted);
+    }
+
+    /* Features list */
+    .fleet-showcase__feat-title {
+      font-size: 0.63rem;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--silver);
+      margin-bottom: 18px;
+    }
+    .fleet-showcase__feats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px 24px;
+      margin-bottom: 40px;
+    }
+    .showcase-feat {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.8rem;
+      color: var(--text-dark-sec);
+    }
+    .showcase-feat-dot {
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--champagne);
+      flex-shrink: 0;
+    }
+    .fleet-showcase__cta {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .fleet-showcase .btn-primary {
+      background: var(--white);
+      color: var(--black-deep);
+      border-color: var(--white);
+    }
+    .fleet-showcase .btn-primary:hover {
+      background: var(--silver-light);
+      box-shadow: 0 8px 24px rgba(255,255,255,0.1);
+    }
+    .fleet-showcase .btn-secondary {
+      color: var(--white);
+      border-color: rgba(255,255,255,0.22);
+    }
+    .fleet-showcase .btn-secondary:hover {
+      border-color: var(--silver);
+      background: rgba(255,255,255,0.06);
+    }
+
+    /* ── MODAL ── */
+    .fleet-modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.78);
+      z-index: 3000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+    }
+    .fleet-modal-backdrop.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+    .fleet-modal {
+      background: var(--black-carbon);
+      width: 100%;
+      max-width: 860px;
+      max-height: 90vh;
+      overflow-y: auto;
+      border-radius: var(--radius-md);
+      border: 1px solid rgba(255,255,255,0.08);
+      transform: translateY(20px) scale(0.985);
+      transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
+      position: relative;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(255,255,255,0.12) transparent;
+    }
+    .fleet-modal-backdrop.open .fleet-modal {
+      transform: translateY(0) scale(1);
+    }
+    .fleet-modal__close {
+      position: absolute;
+      top: 18px;
+      right: 20px;
+      z-index: 10;
+      width: 38px;
+      height: 38px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255,255,255,0.1);
+      border-radius: 50%;
+      border: none;
+      cursor: pointer;
+      color: var(--white);
+      transition: background var(--t-fast);
+    }
+    .fleet-modal__close:hover { background: rgba(255,255,255,0.18); }
+    .fleet-modal__hero-img {
+      width: 100%;
+      height: 280px;
+      object-fit: cover;
+      display: block;
+      border-radius: var(--radius-md) var(--radius-md) 0 0;
+    }
+    .fleet-modal__body {
+      padding: 36px 40px 44px;
+    }
+    .fleet-modal__cat {
+      font-size: 0.6rem;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--champagne);
+      margin-bottom: 10px;
+      display: block;
+    }
+    .fleet-modal__name {
+      font-family: var(--font-serif);
+      font-size: clamp(1.7rem, 3vw, 2.2rem);
+      font-weight: 500;
+      color: var(--white);
+      margin-bottom: 6px;
+      line-height: 1.15;
+    }
+    .fleet-modal__sub {
+      font-size: 0.7rem;
+      color: var(--silver);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+    .fleet-modal__desc {
+      font-size: 0.87rem;
+      font-weight: 300;
+      line-height: 1.9;
+      color: var(--text-dark-sec);
+      margin-bottom: 32px;
+    }
+    .fleet-modal__specs {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      margin-bottom: 32px;
+    }
+    .modal-spec {
+      padding: 16px 10px;
+      background: var(--black-carbon);
+      text-align: center;
+    }
+    .modal-spec__val {
+      display: block;
+      font-family: var(--font-serif);
+      font-size: 1.25rem;
+      font-weight: 500;
+      color: var(--white);
+      margin-bottom: 3px;
+      line-height: 1;
+    }
+    .modal-spec__lbl {
+      font-size: 0.56rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-dark-muted);
+    }
+    .fleet-modal__feats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px 20px;
+      margin-bottom: 36px;
+    }
+    .modal-feat {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.78rem;
+      color: var(--text-dark-sec);
+    }
+    .modal-feat-dot {
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--champagne);
+      flex-shrink: 0;
+    }
+    .fleet-modal__cta {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .fleet-modal .btn-primary {
+      background: var(--white);
+      color: var(--black-deep);
+      border-color: var(--white);
+    }
+    .fleet-modal .btn-primary:hover { background: var(--silver-light); }
+    .fleet-modal .btn-secondary {
+      color: var(--white);
+      border-color: rgba(255,255,255,0.22);
+    }
+    .fleet-modal .btn-secondary:hover {
+      border-color: var(--silver);
+      background: rgba(255,255,255,0.06);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1024px) {
+      .fleet-showcase__inner { grid-template-columns: 1fr; gap: 52px; }
+      .fleet-showcase__gallery { position: static; }
+    }
+    @media (max-width: 768px) {
+      .fleet-grid { grid-template-columns: 1fr; }
+      .fleet-hero { min-height: 52vh; padding: 130px 0 60px; }
+      .fleet-hero__title { font-size: clamp(1.9rem, 6vw, 2.8rem); }
+      .fleet-modal__specs { grid-template-columns: repeat(2,1fr); }
+      .fleet-modal__feats { grid-template-columns: 1fr; }
+      .fleet-modal__body { padding: 24px 22px 32px; }
+      .fleet-modal__hero-img { height: 200px; }
+      .fleet-card__cta { flex-direction: column; }
+      .fleet-showcase__feats { grid-template-columns: 1fr; }
+      .fleet-showcase__specs { grid-template-columns: repeat(3,1fr); }
+    }
+    @media (max-width: 480px) {
+      .fleet-filter-btn { padding: 16px 18px; }
+      .fleet-card__body { padding: 22px 20px 18px; }
+      .fleet-card__features { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ============================================================
+     NAVIGATION
+     ============================================================ -->
+<nav class="navbar" aria-label="Navigation principale">
+  <div class="navbar__inner">
+    <a href="index.html" class="navbar__logo" aria-label="Black V Prestige — Accueil">
+      <span class="navbar__logo-title">Black V Prestige</span>
+      <span class="navbar__logo-subtitle">Private Chauffeur Service</span>
+    </a>
+    <div class="navbar__nav" role="navigation">
+      <a href="index.html"                     class="navbar__link">Accueil</a>
+            <div class="navbar__dropdown">
+        <button class="navbar__link navbar__dropdown-btn" aria-haspopup="true" aria-expanded="false">Services<svg class="navbar__dropdown-caret" width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></button>
+        <div class="navbar__dropdown-menu" role="menu">
+          <a href="services.html" class="navbar__dropdown-item" role="menuitem">Nos Services</a>
+          <a href="experience.html" class="navbar__dropdown-item" role="menuitem">L'Expérience</a>
+        </div>
+      </div>
+      <a href="notre-flotte.html"              class="navbar__link navbar__link--active">Notre Flotte</a>
+      <a href="evenements-partenaires.html"    class="navbar__link">Événements</a>
+      <a href="a-propos.html"                  class="navbar__link">À propos</a>
+      <a href="contact.html"                   class="navbar__link">Contact</a>
+    </div>
+    <a href="reservation.html" class="btn btn-primary navbar__cta">Réserver</a>
+    <button class="navbar__burger" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" role="dialog" aria-modal="true" aria-label="Menu mobile">
+  <button class="mobile-menu__close" aria-label="Fermer le menu">
+    <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="1.5" fill="none">
+      <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+    </svg>
+  </button>
+  <nav class="mobile-menu__nav">
+    <a href="index.html"                  class="mobile-menu__link">Accueil</a>
+    <a href="services.html"               class="mobile-menu__link">Services</a>
+    <a href="experience.html" class="mobile-menu__link mobile-menu__link--sub">L'Expérience</a>
+    <a href="notre-flotte.html"           class="mobile-menu__link">Notre Flotte</a>
+    <a href="evenements-partenaires.html" class="mobile-menu__link">Événements</a>
+    <a href="a-propos.html"               class="mobile-menu__link">À propos</a>
+    <a href="contact.html"                class="mobile-menu__link">Contact</a>
+  </nav>
+  <a href="reservation.html" class="btn btn-primary">Réserver</a>
+  <div class="mobile-menu__contact" style="margin-top:32px;">
+    <a href="tel:+33685866890">+33 6 85 86 68 90</a>
+    <a href="mailto:contact@blackvprestige.fr">contact@blackvprestige.fr</a>
+  </div>
+</div>
+
+<!-- ============================================================
+     HERO FLOTTE
+     ============================================================ -->
+<section class="fleet-hero" aria-label="Notre flotte de véhicules">
+  <div class="fleet-hero__bg" aria-hidden="true">
+    <img
+      src="https://images.unsplash.com/photo-1765461734605-34657fa04db2?auto=format&fit=crop&w=1920&q=80"
+      alt=""
+      class="fleet-hero__bg-img"
+      loading="eager">
+    <div class="fleet-hero__bg-overlay"></div>
+  </div>
+  <div class="container fleet-hero__inner">
+    <span class="label-premium reveal" style="color:var(--silver);">Notre Flotte</span>
+    <h1 class="fleet-hero__title reveal">Des véhicules d'exception<br>pour chaque déplacement.</h1>
+    <p class="fleet-hero__sub reveal">Une sélection de véhicules premium soigneusement choisis pour vous offrir confort, discrétion et sérénité à chaque trajet, partout en France.</p>
+    <div class="fleet-hero__meta reveal">
+      <span class="fleet-hero__badge"><span class="fleet-hero__badge-line"></span>Haut de gamme</span>
+      <span class="fleet-hero__badge"><span class="fleet-hero__badge-line"></span>Full Options</span>
+      <span class="fleet-hero__badge"><span class="fleet-hero__badge-line"></span>24h/24 · 7j/7</span>
+      <span class="fleet-hero__badge"><span class="fleet-hero__badge-line"></span>France entière</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     FILTER BAR
+     ============================================================ -->
+<div class="fleet-filters-wrap" role="navigation" aria-label="Filtrer la flotte par catégorie">
+  <div class="container">
+    <div class="fleet-filters" role="tablist" aria-label="Catégories de véhicules">
+      <button class="fleet-filter-btn active" data-filter="all" role="tab" aria-selected="true" aria-controls="fleet-grid">
+        Tous les véhicules <span class="fleet-filter-count" id="count-all">3</span>
+      </button>
+      <button class="fleet-filter-btn" data-filter="van" role="tab" aria-selected="false">
+        Van Premium <span class="fleet-filter-count">1</span>
+      </button>
+      <button class="fleet-filter-btn" data-filter="berline" role="tab" aria-selected="false">
+        Berline Prestige <span class="fleet-filter-count">2</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     FLEET GRID
+     ============================================================ -->
+<section class="fleet-grid-section section--white" aria-labelledby="fleet-heading">
+  <div class="container">
+
+    <div class="fleet-grid-header reveal">
+      <p class="fleet-visible-txt">
+        <strong id="fleet-visible-count">3</strong> véhicule(s) dans notre flotte
+      </p>
+    </div>
+
+    <div class="fleet-grid" id="fleet-grid" role="list">
+
+      <!-- ═══════════════════════════════════════
+           CARD 1 : Mercedes Classe V — ACTIF
+           ═══════════════════════════════════════ -->
+      <article
+        class="fleet-card visible reveal"
+        data-category="van"
+        role="listitem"
+        aria-label="Mercedes Classe V — Van Premium">
+
+        <div class="fleet-card__media">
+          <img
+            src="https://images.unsplash.com/photo-1765461734605-34657fa04db2?auto=format&fit=crop&w=800&q=80"
+            alt="Mercedes Classe V Black V Prestige — vue extérieure"
+            class="fleet-card__img"
+            loading="lazy">
+          <div class="fleet-card__img-overlay" aria-hidden="true"></div>
+          <span class="fleet-card__badge">Van Premium</span>
+        </div>
+
+        <div class="fleet-card__body">
+          <div>
+            <h2 class="fleet-card__name">Mercedes Classe V</h2>
+            <p class="fleet-card__tagline">2024 · Full Options · Ciel étoilé</p>
+          </div>
+
+          <div class="fleet-card__specs" aria-label="Capacités du véhicule">
+            <div class="fleet-spec-item">
+              <svg class="fleet-spec-icon" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
+                <circle cx="9" cy="7" r="4"/>
+                <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <span class="fleet-spec-val">7</span>
+              <span class="fleet-spec-lbl">Passagers</span>
+            </div>
+            <div class="fleet-spec-item">
+              <svg class="fleet-spec-icon" viewBox="0 0 24 24" aria-hidden="true">
+                <rect x="2" y="7" width="20" height="14" rx="2"/>
+                <path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2" stroke-linecap="round"/>
+              </svg>
+              <span class="fleet-spec-val">5</span>
+              <span class="fleet-spec-lbl">Bagages</span>
+            </div>
+            <div class="fleet-spec-item">
+              <svg class="fleet-spec-icon" viewBox="0 0 24 24" aria-hidden="true">
+                <rect x="3" y="3" width="18" height="18" rx="2"/>
+                <path d="M9 3v18" stroke-linecap="round"/>
+              </svg>
+              <span class="fleet-spec-val">5</span>
+              <span class="fleet-spec-lbl">Portes</span>
+            </div>
+          </div>
+
+          <ul class="fleet-card__features" aria-label="Équipements principaux">
+            <li class="fleet-feat-item">Ciel étoilé LED</li>
+            <li class="fleet-feat-item">Climatisation 4 zones</li>
+            <li class="fleet-feat-item">Vitres teintées</li>
+            <li class="fleet-feat-item">Chargeurs USB/C</li>
+            <li class="fleet-feat-item">Sièges cuir</li>
+            <li class="fleet-feat-item">WiFi à bord</li>
+          </ul>
+
+          <div class="fleet-card__cta">
+            <button
+              class="btn btn-secondary fleet-detail-btn"
+              data-vehicle="classe-v"
+              aria-haspopup="dialog"
+              aria-label="Voir les détails de la Mercedes Classe V">
+              Voir les détails
+            </button>
+            <a href="reservation.html" class="btn btn-primary">
+              Réserver
+              <svg class="btn-icon" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <!-- ═══════════════════════════════════════
+           CARD 2 : Mercedes Classe S 2025 — PROCHAINEMENT
+           ═══════════════════════════════════════ -->
+      <article
+        class="fleet-card fleet-card--coming visible reveal delay-3"
+        data-category="berline"
+        role="listitem"
+        aria-label="Mercedes Classe S 2025 — Prochainement disponible">
+
+        <div class="fleet-card__media">
+          <img
+            src="https://images.unsplash.com/photo-1563694983011-6f4d90358083?auto=format&fit=crop&w=800&q=80"
+            alt="Mercedes Classe S 2025 — Prochainement"
+            class="fleet-card__img"
+            loading="lazy"
+            style="filter:grayscale(0.4);">
+          <div class="fleet-card__img-overlay" aria-hidden="true"></div>
+          <span class="fleet-card__badge fleet-card__badge--dark">Berline Prestige</span>
+        </div>
+
+        <div class="fleet-card__body">
+          <div>
+            <h2 class="fleet-card__name">Mercedes Classe S</h2>
+            <p class="fleet-card__tagline">2025 · Long Wheelbase · AMG Line</p>
+          </div>
+
+          <div class="fleet-card__specs" aria-hidden="true">
+            <div class="fleet-spec-item">
+              <svg class="fleet-spec-icon" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/>
+              </svg>
+              <span class="fleet-spec-val">4</span>
+              <span class="fleet-spec-lbl">Passagers</span>
+            </div>
+            <div class="fleet-spec-item">
+              <svg class="fleet-spec-icon" viewBox="0 0 24 24" aria-hidden="true">
+                <rect x="2" y="7" width="20" height="14" rx="2"/>
+                <path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2" stroke-linecap="round"/>
+              </svg>
+              <span class="fleet-spec-val">4</span>
+              <span class="fleet-spec-lbl">Bagages</span>
+            </div>
+            <div class="fleet-spec-item">
+              <svg class="fleet-spec-icon" viewBox="0 0 24 24" aria-hidden="true">
+                <rect x="3" y="3" width="18" height="18" rx="2"/>
+                <path d="M9 3v18" stroke-linecap="round"/>
+              </svg>
+              <span class="fleet-spec-val">4</span>
+              <span class="fleet-spec-lbl">Portes</span>
+            </div>
+          </div>
+
+          <ul class="fleet-card__features" aria-hidden="true">
+            <li class="fleet-feat-item">Cuir Nappa chauffant</li>
+            <li class="fleet-feat-item">Siège massant 5D</li>
+            <li class="fleet-feat-item">MBUX Hyperscreen</li>
+            <li class="fleet-feat-item">Affichage tête haute AR</li>
+          </ul>
+
+          <div class="fleet-card__cta" aria-hidden="true">
+            <button class="btn btn-secondary" disabled>Voir les détails</button>
+            <button class="btn btn-primary" disabled>Réserver</button>
+          </div>
+        </div>
+      </article>
+
+      <!-- ═══════════════════════════════════════
+           CARD 5 : BMW Série 7 2025 — PROCHAINEMENT
+           ═══════════════════════════════════════ -->
+      <article
+        class="fleet-card fleet-card--coming visible reveal delay-4"
+        data-category="berline"
+        role="listitem"
+        aria-label="BMW Série 7 2025 — Prochainement disponible">
+
+        <div class="fleet-card__media">
+          <img
+            src="https://images.unsplash.com/photo-1765461734605-34657fa04db2?auto=format&fit=crop&w=800&q=80"
+            alt="BMW Série 7 2025 — Prochainement"
+            class="fleet-card__img"
+            loading="lazy"
+            style="filter:grayscale(0.4);">
+          <div class="fleet-card__img-overlay" aria-hidden="true"></div>
+          <span class="fleet-card__badge fleet-card__badge--dark">Berline Prestige</span>
+        </div>
+
+        <div class="fleet-card__body">
+          <div>
+            <h2 class="fleet-card__name">BMW Série 7</h2>
+            <p class="fleet-card__tagline">2025 · 760i xDrive · M Sport</p>
+          </div>
+
+          <div class="fleet-card__specs" aria-hidden="true">
+            <div class="fleet-spec-item">
+              <svg class="fleet-spec-icon" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/>
+              </svg>
+              <span class="fleet-spec-val">4</span>
+              <span class="fleet-spec-lbl">Passagers</span>
+            </div>
+            <div class="fleet-spec-item">
+              <svg class="fleet-spec-icon" viewBox="0 0 24 24" aria-hidden="true">
+                <rect x="2" y="7" width="20" height="14" rx="2"/>
+                <path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2" stroke-linecap="round"/>
+              </svg>
+              <span class="fleet-spec-val">3</span>
+              <span class="fleet-spec-lbl">Bagages</span>
+            </div>
+            <div class="fleet-spec-item">
+              <svg class="fleet-spec-icon" viewBox="0 0 24 24" aria-hidden="true">
+                <rect x="3" y="3" width="18" height="18" rx="2"/>
+                <path d="M9 3v18" stroke-linecap="round"/>
+              </svg>
+              <span class="fleet-spec-val">4</span>
+              <span class="fleet-spec-lbl">Portes</span>
+            </div>
+          </div>
+
+          <ul class="fleet-card__features" aria-hidden="true">
+            <li class="fleet-feat-item">Executive Lounge arrière</li>
+            <li class="fleet-feat-item">Sky Lounge panoramique</li>
+            <li class="fleet-feat-item">Bowers &amp; Wilkins 36 HP</li>
+            <li class="fleet-feat-item">Suspension pneumatique</li>
+          </ul>
+
+          <div class="fleet-card__cta" aria-hidden="true">
+            <button class="btn btn-secondary" disabled>Voir les détails</button>
+            <button class="btn btn-primary" disabled>Réserver</button>
+          </div>
+        </div>
+      </article>
+
+    </div><!-- /#fleet-grid -->
+
+    <!-- No-results message (hidden by default) -->
+    <div class="fleet-no-results" id="fleet-no-results" style="display:none; text-align:center; padding:60px 0;">
+      <p style="font-size:0.9rem; color:var(--text-muted);">Aucun véhicule dans cette catégorie pour l'instant.</p>
+    </div>
+
+  </div><!-- /.container -->
+</section>
+
+<!-- ============================================================
+     VEHICLE SHOWCASE — MERCEDES CLASSE V
+     ============================================================ -->
+<section class="fleet-showcase" aria-labelledby="showcase-heading">
+  <div class="container">
+
+    <div class="fleet-showcase__header reveal">
+      <span class="label-premium" style="color:var(--silver);">En détail</span>
+      <h2 class="fleet-showcase__title" id="showcase-heading" style="text-align:center; margin-top:16px;">
+        Mercedes Classe V<br><em>Votre salon privé sur route</em>
+      </h2>
+    </div>
+
+    <div class="fleet-showcase__inner">
+
+      <!-- Galerie photos -->
+      <div class="fleet-showcase__gallery reveal-left">
+        <div class="fleet-showcase__main-wrap">
+          <img
+            src="https://images.unsplash.com/photo-1765461734605-34657fa04db2?auto=format&fit=crop&w=1000&q=85"
+            alt="Mercedes Classe V — vue extérieure"
+            class="fleet-showcase__main-img"
+            id="showcase-main-img"
+            loading="lazy">
+        </div>
+        <div class="fleet-showcase__thumbs" role="list" aria-label="Photos du véhicule">
+          <img
+            src="https://images.unsplash.com/photo-1765461734605-34657fa04db2?auto=format&fit=crop&w=280&q=70"
+            alt="Extérieur"
+            class="fleet-thumb active"
+            data-full="https://images.unsplash.com/photo-1765461734605-34657fa04db2?auto=format&fit=crop&w=1000&q=85"
+            loading="lazy"
+            role="listitem"
+            tabindex="0"
+            aria-label="Vue extérieure">
+          <img
+            src="https://images.unsplash.com/photo-1639060016125-dfde31ca1af8?auto=format&fit=crop&w=280&q=70"
+            alt="Intérieur"
+            class="fleet-thumb"
+            data-full="https://images.unsplash.com/photo-1639060016125-dfde31ca1af8?auto=format&fit=crop&w=1000&q=85"
+            loading="lazy"
+            role="listitem"
+            tabindex="0"
+            aria-label="Vue intérieure">
+          <img
+            src="https://images.unsplash.com/photo-1765461734605-34657fa04db2?auto=format&fit=crop&w=280&q=70"
+            alt="Profil"
+            class="fleet-thumb"
+            data-full="https://images.unsplash.com/photo-1765461734605-34657fa04db2?auto=format&fit=crop&w=1000&q=85"
+            loading="lazy"
+            role="listitem"
+            tabindex="0"
+            aria-label="Vue de profil">
+          <img
+            src="https://images.unsplash.com/photo-1765461734605-34657fa04db2?auto=format&fit=crop&w=280&q=70"
+            alt="Service"
+            class="fleet-thumb"
+            data-full="https://images.unsplash.com/photo-1765461734605-34657fa04db2?auto=format&fit=crop&w=1000&q=85"
+            loading="lazy"
+            role="listitem"
+            tabindex="0"
+            aria-label="Service chauffeur">
+        </div>
+      </div>
+
+      <!-- Contenu détaillé -->
+      <div class="fleet-showcase__content reveal-right">
+        <span class="label-premium" style="color:var(--silver);">Van Premium</span>
+        <h3 class="fleet-showcase__title">Mercedes Classe V<br><em>Full Options — 2024</em></h3>
+        <p class="fleet-showcase__desc">
+          Le Mercedes Classe V dernière génération est bien plus qu'un véhicule de transport — c'est un salon privé sur roues. Intérieur ciel étoilé, assises en cuir pleine fleur, espace généreux et silence acoustique remarquable : chaque détail a été pensé pour offrir une expérience de transport incomparable à vos passagers les plus exigeants.
+        </p>
+
+        <div class="fleet-showcase__specs" role="list" aria-label="Caractéristiques techniques">
+          <div class="showcase-spec" role="listitem">
+            <span class="showcase-spec__val">7</span>
+            <span class="showcase-spec__lbl">Passagers</span>
+          </div>
+          <div class="showcase-spec" role="listitem">
+            <span class="showcase-spec__val">5</span>
+            <span class="showcase-spec__lbl">Bagages</span>
+          </div>
+          <div class="showcase-spec" role="listitem">
+            <span class="showcase-spec__val">5</span>
+            <span class="showcase-spec__lbl">Portes</span>
+          </div>
+          <div class="showcase-spec" role="listitem">
+            <span class="showcase-spec__val" style="font-size:1rem;">Classe V</span>
+            <span class="showcase-spec__lbl">Modèle</span>
+          </div>
+          <div class="showcase-spec" role="listitem">
+            <span class="showcase-spec__val" style="font-size:1rem;">2024</span>
+            <span class="showcase-spec__lbl">Année</span>
+          </div>
+          <div class="showcase-spec" role="listitem">
+            <span class="showcase-spec__val" style="font-size:0.85rem; background:var(--gradient-chrome); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;">FULL</span>
+            <span class="showcase-spec__lbl">Options</span>
+          </div>
+        </div>
+
+        <p class="fleet-showcase__feat-title">Équipements &amp; Confort</p>
+        <div class="fleet-showcase__feats">
+          <div class="showcase-feat"><span class="showcase-feat-dot"></span>Ciel étoilé LED</div>
+          <div class="showcase-feat"><span class="showcase-feat-dot"></span>Climatisation 4 zones</div>
+          <div class="showcase-feat"><span class="showcase-feat-dot"></span>Vitres teintées</div>
+          <div class="showcase-feat"><span class="showcase-feat-dot"></span>Sièges cuir pleine fleur</div>
+          <div class="showcase-feat"><span class="showcase-feat-dot"></span>WiFi haut débit à bord</div>
+          <div class="showcase-feat"><span class="showcase-feat-dot"></span>Chargeurs USB &amp; USB-C</div>
+          <div class="showcase-feat"><span class="showcase-feat-dot"></span>Écrans multimédia</div>
+          <div class="showcase-feat"><span class="showcase-feat-dot"></span>Isolation phonique renforcée</div>
+          <div class="showcase-feat"><span class="showcase-feat-dot"></span>Coffre grande capacité</div>
+          <div class="showcase-feat"><span class="showcase-feat-dot"></span>Eau minérale &amp; rafraîchissements</div>
+        </div>
+
+        <div class="fleet-showcase__cta">
+          <a href="reservation.html" class="btn btn-primary">
+            <svg class="btn-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M8 2v4M16 2v4M3 10h18M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            Demander un devis
+          </a>
+          <a href="tel:+33685866890" class="btn btn-secondary">
+            <svg class="btn-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 014.27 11.9 19.79 19.79 0 011.21 3.3 2 2 0 013.2 1.11h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            Appeler
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     MODAL DÉTAILS VÉHICULE
+     ============================================================ -->
+<div
+  class="fleet-modal-backdrop"
+  id="fleet-modal-backdrop"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="modal-vehicle-name"
+  aria-hidden="true">
+
+  <div class="fleet-modal" id="fleet-modal" tabindex="-1">
+    <button class="fleet-modal__close" id="fleet-modal-close" aria-label="Fermer">
+      <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="1.5" fill="none">
+        <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+      </svg>
+    </button>
+    <img
+      src="https://images.unsplash.com/photo-1765461734605-34657fa04db2?auto=format&fit=crop&w=860&q=80"
+      alt="Mercedes Classe V"
+      class="fleet-modal__hero-img"
+      id="modal-hero-img"
+      loading="lazy">
+    <div class="fleet-modal__body">
+      <span class="fleet-modal__cat" id="modal-cat">Van Premium</span>
+      <h2 class="fleet-modal__name" id="modal-vehicle-name">Mercedes Classe V</h2>
+      <p class="fleet-modal__sub" id="modal-sub">2024 · Full Options · Ciel étoilé</p>
+      <p class="fleet-modal__desc" id="modal-desc">
+        Le Mercedes Classe V dernière génération offre une expérience de transport unique : intérieur ciel étoilé, sièges en cuir pleine fleur, climatisation 4 zones et silence de roulement exceptionnel. Un véritable salon privé pour 7 passagers, disponible 24h/24, partout en France.
+      </p>
+      <div class="fleet-modal__specs" role="list" aria-label="Caractéristiques">
+        <div class="modal-spec" role="listitem">
+          <span class="modal-spec__val">7</span>
+          <span class="modal-spec__lbl">Passagers</span>
+        </div>
+        <div class="modal-spec" role="listitem">
+          <span class="modal-spec__val">5</span>
+          <span class="modal-spec__lbl">Bagages</span>
+        </div>
+        <div class="modal-spec" role="listitem">
+          <span class="modal-spec__val">5</span>
+          <span class="modal-spec__lbl">Portes</span>
+        </div>
+        <div class="modal-spec" role="listitem">
+          <span class="modal-spec__val" style="font-size:0.88rem;">2024</span>
+          <span class="modal-spec__lbl">Année</span>
+        </div>
+      </div>
+      <div class="fleet-modal__feats">
+        <div class="modal-feat"><span class="modal-feat-dot"></span>Ciel étoilé LED</div>
+        <div class="modal-feat"><span class="modal-feat-dot"></span>Climatisation 4 zones</div>
+        <div class="modal-feat"><span class="modal-feat-dot"></span>Vitres teintées</div>
+        <div class="modal-feat"><span class="modal-feat-dot"></span>Sièges cuir pleine fleur</div>
+        <div class="modal-feat"><span class="modal-feat-dot"></span>WiFi haut débit</div>
+        <div class="modal-feat"><span class="modal-feat-dot"></span>Chargeurs USB &amp; USB-C</div>
+        <div class="modal-feat"><span class="modal-feat-dot"></span>Écrans multimédia</div>
+        <div class="modal-feat"><span class="modal-feat-dot"></span>Isolation phonique</div>
+        <div class="modal-feat"><span class="modal-feat-dot"></span>Coffre grande capacité</div>
+        <div class="modal-feat"><span class="modal-feat-dot"></span>Rafraîchissements inclus</div>
+      </div>
+      <div class="fleet-modal__cta">
+        <a href="reservation.html" class="btn btn-primary">
+          <svg class="btn-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M8 2v4M16 2v4M3 10h18M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          Réserver ce véhicule
+        </a>
+        <button class="btn btn-secondary" id="fleet-modal-close-btn">Fermer</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     CTA FINAL
+     ============================================================ -->
+<section class="cta-section section--carbon" aria-labelledby="fleet-cta-title">
+  <div class="cta-section__content">
+    <div class="cta-section__divider" aria-hidden="true"></div>
+    <span class="label-premium reveal" style="margin-bottom:24px; display:block;">Prêt à voyager ?</span>
+    <h2 class="section-title reveal" id="fleet-cta-title" style="margin-bottom:20px;">
+      Réservez votre prochain trajet avec Black V Prestige.
+    </h2>
+    <p class="section-subtitle reveal" style="margin:0 auto 40px; text-align:center;">
+      Transferts, événements, mise à disposition ou accompagnement privé — notre Mercedes Classe V et nos chauffeurs sont disponibles 24h/24, 7j/7, partout en France.
+    </p>
+    <div class="btn-group reveal" style="justify-content:center; margin-bottom:40px;">
+      <a href="reservation.html" class="btn btn-primary">Demander un devis</a>
+      <a href="tel:+33685866890" class="btn btn-secondary">
+        <svg class="btn-icon" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 014.27 11.9 19.79 19.79 0 011.21 3.3 2 2 0 013.2 1.11h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Appeler maintenant
+      </a>
+    </div>
+    <div class="cta-section__contacts reveal">
+      <a href="tel:+33685866890" class="cta-contact-item">
+        <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 014.27 11.9 19.79 19.79 0 011.21 3.3 2 2 0 013.2 1.11h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        +33 6 85 86 68 90
+      </a>
+      <a href="mailto:contact@blackvprestige.fr" class="cta-contact-item">
+        <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        contact@blackvprestige.fr
+      </a>
+      <span class="cta-contact-item">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14" stroke-linecap="round"/></svg>
+        Disponible 24h/24 — 7j/7
+      </span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
+<footer class="footer" role="contentinfo">
+  <div class="container">
+    <div class="footer__grid">
+      <div class="footer__brand">
+        <div>
+          <div class="footer__logo-title">Black V Prestige</div>
+          <span class="footer__logo-sub">Private Chauffeur Service</span>
+        </div>
+        <p class="footer__tagline">L'excellence du chauffeur privé, disponible 24h/24 et 7j/7, partout en France.</p>
+        <div class="footer__socials">
+          <a href="#" class="footer__social" aria-label="Instagram">
+            <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/></svg>
+          </a>
+          <a href="#" class="footer__social" aria-label="LinkedIn">
+            <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+          </a>
+          <a href="#" class="footer__social" aria-label="Facebook">
+            <svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="footer__col">
+        <div class="footer__col-title">Navigation</div>
+        <div class="footer__links">
+          <a href="index.html"                  class="footer__link">Accueil</a>
+          <a href="services.html"               class="footer__link">Services</a>
+          <a href="notre-flotte.html"           class="footer__link">Notre Flotte</a>
+          <a href="experience.html"             class="footer__link">Expérience</a>
+          <a href="evenements-partenaires.html" class="footer__link">Événements &amp; Partenaires</a>
+          <a href="a-propos.html"               class="footer__link">À propos</a>
+          <a href="reservation.html"            class="footer__link">Réservation</a>
+          <a href="contact.html"                class="footer__link">Contact</a>
+        </div>
+      </div>
+
+      <div class="footer__col">
+        <div class="footer__col-title">Services</div>
+        <div class="footer__links">
+          <a href="services.html#aeroport"           class="footer__link">Transfert aéroport</a>
+          <a href="services.html#gare"               class="footer__link">Transfert gare</a>
+          <a href="services.html#hotels"             class="footer__link">Hôtels &amp; palaces</a>
+          <a href="services.html#vip"                class="footer__link">Artistes &amp; VIP</a>
+          <a href="services.html#mise-a-disposition" class="footer__link">Mise à disposition</a>
+          <a href="services.html#mariage"            class="footer__link">Mariages</a>
+          <a href="services.html#longue-distance"    class="footer__link">Longue distance</a>
+        </div>
+      </div>
+
+      <div class="footer__col">
+        <div class="footer__col-title">Contact</div>
+        <div class="footer__contact">
+          <div class="footer__contact-item">
+            <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 014.27 11.9 19.79 19.79 0 011.21 3.3 2 2 0 013.2 1.11h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <a href="tel:+33685866890">+33 6 85 86 68 90</a>
+          </div>
+          <div class="footer__contact-item">
+            <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            <a href="mailto:contact@blackvprestige.fr">contact@blackvprestige.fr</a>
+          </div>
+          <div class="footer__contact-item">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14" stroke-linecap="round"/></svg>
+            <span>24h/24 — 7j/7</span>
+          </div>
+          <div class="footer__contact-item">
+            <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span>France entière</span>
+          </div>
+        </div>
+        <a href="reservation.html" class="btn btn-primary" style="margin-top:20px; font-size:0.68rem; padding:12px 24px;">Réserver</a>
+      </div>
+    </div>
+
+    <div class="footer__bottom">
+      <span class="footer__copy">© 2024 Black V Prestige. Tous droits réservés.</span>
+      <div class="footer__legal">
+        <a href="mentions-legales.html">Mentions légales</a>
+        <a href="politique-confidentialite.html">Politique de confidentialité</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Back to Top -->
+<button class="back-to-top" aria-label="Retour en haut de page">
+  <svg viewBox="0 0 24 24"><path d="M18 15l-6-6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</button>
+
+<!-- ============================================================
+     SCRIPTS
+     ============================================================ -->
+<script src="assets/js/script.js"></script>
+<script src="assets/js/translator.js"></script>
+<script>
+  (function () {
+    'use strict';
+
+    /* ── FILTER TABS ── */
+    const filterBtns    = document.querySelectorAll('.fleet-filter-btn');
+    const cards         = document.querySelectorAll('.fleet-card');
+    const countEl       = document.getElementById('fleet-visible-count');
+    const noResultsEl   = document.getElementById('fleet-no-results');
+
+    function applyFilter(filter) {
+      let visible = 0;
+
+      cards.forEach(card => {
+        const match = filter === 'all' || card.dataset.category === filter;
+        if (match) {
+          card.classList.add('visible');
+          card.style.animationDelay = (visible * 0.06) + 's';
+          visible++;
+        } else {
+          card.classList.remove('visible');
+        }
+      });
+
+      if (countEl)     countEl.textContent = visible;
+      if (noResultsEl) noResultsEl.style.display = visible === 0 ? 'block' : 'none';
+    }
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => {
+          b.classList.remove('active');
+          b.setAttribute('aria-selected', 'false');
+        });
+        btn.classList.add('active');
+        btn.setAttribute('aria-selected', 'true');
+        applyFilter(btn.dataset.filter);
+      });
+    });
+
+    /* ── GALLERY THUMBNAILS ── */
+    const mainImg = document.getElementById('showcase-main-img');
+    const thumbs  = document.querySelectorAll('.fleet-thumb');
+
+    function switchThumb(thumb) {
+      if (!mainImg) return;
+      mainImg.style.opacity = '0';
+      setTimeout(() => {
+        mainImg.src = thumb.dataset.full;
+        mainImg.alt = thumb.alt;
+        mainImg.style.opacity = '1';
+      }, 180);
+      thumbs.forEach(t => t.classList.remove('active'));
+      thumb.classList.add('active');
+    }
+
+    thumbs.forEach(thumb => {
+      thumb.addEventListener('click', () => switchThumb(thumb));
+      thumb.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); switchThumb(thumb); }
+      });
+    });
+
+    /* ── MODAL ── */
+    const backdrop     = document.getElementById('fleet-modal-backdrop');
+    const modal        = document.getElementById('fleet-modal');
+    const closeBtns    = [
+      document.getElementById('fleet-modal-close'),
+      document.getElementById('fleet-modal-close-btn'),
+    ];
+    const detailBtns   = document.querySelectorAll('.fleet-detail-btn');
+    let   lastFocused  = null;
+
+    function openModal() {
+      lastFocused = document.activeElement;
+      backdrop.classList.add('open');
+      backdrop.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+      /* Focus trap: focus close button */
+      setTimeout(() => {
+        const closeBtn = document.getElementById('fleet-modal-close');
+        if (closeBtn) closeBtn.focus();
+      }, 350);
+    }
+
+    function closeModal() {
+      backdrop.classList.remove('open');
+      backdrop.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+      if (lastFocused) lastFocused.focus();
+    }
+
+    detailBtns.forEach(btn => btn.addEventListener('click', openModal));
+    closeBtns.forEach(btn => { if (btn) btn.addEventListener('click', closeModal); });
+    backdrop.addEventListener('click', e => { if (e.target === backdrop) closeModal(); });
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && backdrop.classList.contains('open')) closeModal();
+    });
+
+    /* Focus trap inside modal */
+    if (modal) {
+      modal.addEventListener('keydown', e => {
+        if (e.key !== 'Tab') return;
+        const focusable = modal.querySelectorAll(
+          'button:not([disabled]), a[href], [tabindex]:not([tabindex="-1"])'
+        );
+        const first = focusable[0];
+        const last  = focusable[focusable.length - 1];
+        if (e.shiftKey) {
+          if (document.activeElement === first) { e.preventDefault(); last.focus(); }
+        } else {
+          if (document.activeElement === last) { e.preventDefault(); first.focus(); }
+        }
+      });
+    }
+
+  })();
+</script>
+</body>
+</html>

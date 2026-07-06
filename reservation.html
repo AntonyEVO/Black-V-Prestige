@@ -1,0 +1,527 @@
+﻿<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Réservation en ligne — Black V Prestige</title>
+  <meta name="description" content="Réservez et payez directement votre course avec Black V Prestige. Calculateur de prix automatique, paiement sécurisé par Stripe. Chauffeur privé haut de gamme 24h/24.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <!-- Stripe.js (chargé une seule fois, en tête de page) -->
+  <script src="https://js.stripe.com/v3/" async></script>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="navbar__inner">
+    <a href="index.html" class="navbar__logo">
+      <span class="navbar__logo-title">Black V Prestige</span>
+      <span class="navbar__logo-subtitle">Private Chauffeur Service</span>
+    </a>
+    <div class="navbar__nav">
+      <a href="index.html"                  class="navbar__link">Accueil</a>
+            <div class="navbar__dropdown">
+        <button class="navbar__link navbar__dropdown-btn" aria-haspopup="true" aria-expanded="false">Services<svg class="navbar__dropdown-caret" width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></button>
+        <div class="navbar__dropdown-menu" role="menu">
+          <a href="services.html" class="navbar__dropdown-item" role="menuitem">Nos Services</a>
+          <a href="experience.html" class="navbar__dropdown-item" role="menuitem">L'Expérience</a>
+        </div>
+      </div>
+      <a href="notre-flotte.html"               class="navbar__link">Notre Flotte</a>
+      <a href="evenements-partenaires.html" class="navbar__link">Événements</a>
+      <a href="a-propos.html"               class="navbar__link">À propos</a>
+      <a href="contact.html"                class="navbar__link">Contact</a>
+    </div>
+    <a href="reservation.html" class="btn btn-primary navbar__cta">Réserver</a>
+    <button class="navbar__burger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<div class="mobile-menu">
+  <button class="mobile-menu__close" aria-label="Fermer"><svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="1.5" fill="none"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+  <nav class="mobile-menu__nav">
+    <a href="index.html"                  class="mobile-menu__link">Accueil</a>
+    <a href="services.html"               class="mobile-menu__link">Services</a>
+    <a href="experience.html" class="mobile-menu__link mobile-menu__link--sub">L'Expérience</a>
+    <a href="notre-flotte.html"               class="mobile-menu__link">Notre Flotte</a>
+    <a href="evenements-partenaires.html" class="mobile-menu__link">Événements</a>
+    <a href="a-propos.html"               class="mobile-menu__link">À propos</a>
+    <a href="contact.html"                class="mobile-menu__link">Contact</a>
+  </nav>
+  <a href="reservation.html" class="btn btn-primary">Réserver</a>
+  <div class="mobile-menu__contact" style="margin-top:32px;"><a href="tel:+33685866890">+33 6 85 86 68 90</a><a href="mailto:contact@blackvprestige.fr">contact@blackvprestige.fr</a></div>
+</div>
+
+<!-- HERO -->
+<section class="page-hero section--dark">
+  <div class="container">
+    <div class="page-hero__label reveal"><span class="label-premium">Réservation</span></div>
+    <h1 class="page-hero__title reveal">Réservez et payez en ligne.</h1>
+    <p class="page-hero__subtitle reveal">Saisissez votre itinéraire, obtenez un prix instantané et réglez directement en toute sécurité. Votre chauffeur est confirmé en quelques minutes.</p>
+  </div>
+</section>
+
+<!-- FORMULAIRE 3 ÉTAPES -->
+<section class="section section--white">
+  <div class="container">
+
+    <!-- Barre de progression -->
+    <div class="booking-steps reveal">
+
+      <div class="booking-step active" data-step="1">
+        <div class="booking-step__num">
+          <span class="sn">1</span>
+          <svg class="sc" viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2.5" fill="none" style="display:none"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <div class="booking-step__label">Votre trajet</div>
+      </div>
+
+      <div class="booking-step" data-step="2">
+        <div class="booking-step__num">
+          <span class="sn">2</span>
+          <svg class="sc" viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2.5" fill="none" style="display:none"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <div class="booking-step__label">Vos coordonnées</div>
+      </div>
+
+      <div class="booking-step" data-step="3">
+        <div class="booking-step__num">
+          <span class="sn">3</span>
+          <svg class="sc" viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2.5" fill="none" style="display:none"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <div class="booking-step__label">Paiement</div>
+      </div>
+
+    </div>
+
+    <div class="booking-layout">
+
+      <!-- ══════════════════════════════════════════════════════
+           PANNEAUX DE FORMULAIRE
+           ══════════════════════════════════════════════════════ -->
+      <div>
+
+        <!-- ── ÉTAPE 1 : ITINÉRAIRE ──────────────────────────── -->
+        <div class="booking-panel active" id="panel-1">
+          <div class="form-premium">
+
+            <span class="label-premium" style="display:block; margin-bottom:24px;">Votre itinéraire</span>
+
+            <!-- Départ -->
+            <div class="form-group">
+              <label class="form-label" for="res-depart">Point de départ *</label>
+              <div class="autocomplete-wrap">
+                <input class="form-input" type="text" id="res-depart" autocomplete="off"
+                  placeholder="Aéroport Nice Côte d'Azur, gare, hôtel, adresse…">
+                <div id="list-depart" class="autocomplete-list"></div>
+              </div>
+            </div>
+
+            <!-- Arrivée -->
+            <div class="form-group">
+              <label class="form-label" for="res-arrivee">Destination *</label>
+              <div class="autocomplete-wrap">
+                <input class="form-input" type="text" id="res-arrivee" autocomplete="off"
+                  placeholder="Hôtel, adresse, ville, gare…">
+                <div id="list-arrivee" class="autocomplete-list"></div>
+              </div>
+            </div>
+
+            <!-- ── Calculateur de prix ──────────────────────── -->
+            <div id="price-calc" class="price-calculator price-calculator--hidden">
+
+              <!-- Chargement -->
+              <div id="pc-loading" class="price-calc__loading" style="display:none;">
+                <span class="bvp-spinner" style="border-color:rgba(0,0,0,0.15); border-top-color:var(--text-primary);"></span>
+                <span>Calcul de l'itinéraire en cours…</span>
+              </div>
+
+              <!-- Résultat -->
+              <div id="pc-result" style="display:none;">
+                <div class="price-route">
+                  <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="1.5" fill="none">
+                    <circle cx="12" cy="5" r="2"/>
+                    <path d="M12 7v10"/>
+                    <circle cx="12" cy="19" r="2" fill="currentColor"/>
+                  </svg>
+                  <div class="price-route__labels">
+                    <strong id="pr-from"></strong>
+                    <strong id="pr-to"></strong>
+                    <span class="price-route__meta" id="pr-meta"></span>
+                  </div>
+                </div>
+
+                <div class="price-breakdown">
+                  <div class="price-line">
+                    <span id="pr-km">Distance</span>
+                    <span id="pr-km-val">—</span>
+                  </div>
+                  <div class="price-line">
+                    <span>Tarif kilométrique</span>
+                    <span>3,50 € / km</span>
+                  </div>
+                  <div id="pr-night-row" class="price-line" style="display:none;">
+                    <span>Supplément nuit (21h – 6h)</span>
+                    <span id="pr-night-val">—</span>
+                  </div>
+                  <div id="pr-aero-row" class="price-line" style="display:none;">
+                    <span>Supplément aéroport</span>
+                    <span>10,00 €</span>
+                  </div>
+                  <div class="price-line price-line--total">
+                    <span>Total estimé TTC</span>
+                    <span id="pr-total">—</span>
+                  </div>
+                </div>
+
+                <p class="price-note">Tarif indicatif calculé sur la distance routière. Minimum de course : 45 €. Prix confirmé avant tout paiement.</p>
+              </div>
+            </div>
+            <!-- fin calculateur -->
+
+            <!-- Date / Heure -->
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="res-date">Date de la course *</label>
+                <input class="form-input" type="date" id="res-date" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="res-heure">Heure de prise en charge *</label>
+                <input class="form-input" type="time" id="res-heure" required>
+              </div>
+            </div>
+
+            <!-- Passagers / Bagages -->
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="res-passagers">Passagers</label>
+                <select class="form-select" id="res-passagers">
+                  <option value="1">1 passager</option>
+                  <option value="2">2 passagers</option>
+                  <option value="3">3 passagers</option>
+                  <option value="4">4 passagers</option>
+                  <option value="5">5 passagers</option>
+                  <option value="6">6 passagers</option>
+                  <option value="7">7 passagers</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="res-bagages">Bagages</label>
+                <select class="form-select" id="res-bagages">
+                  <option value="0">Aucun bagage</option>
+                  <option value="1">1 bagage</option>
+                  <option value="2">2 bagages</option>
+                  <option value="3">3 bagages</option>
+                  <option value="4">4 bagages et plus</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Type de service -->
+            <div class="form-group">
+              <label class="form-label" for="res-service">Type de prestation</label>
+              <select class="form-select" id="res-service">
+                <option value="transfert">Transfert aller simple</option>
+                <option value="aller-retour">Aller-retour</option>
+                <option value="dispo-demi">Mise à disposition — demi-journée (4 h)</option>
+                <option value="dispo-jour">Mise à disposition — journée (8 h+)</option>
+                <option value="evenement">Événement privé ou professionnel</option>
+                <option value="mariage">Mariage haut de gamme</option>
+              </select>
+            </div>
+
+            <div style="display:flex; justify-content:flex-end; margin-top:16px;">
+              <button type="button" class="btn btn-primary" id="btn1-next" disabled>
+                Continuer
+                <svg class="btn-icon" viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="1.5" fill="none"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </button>
+            </div>
+            <p style="font-size:0.75rem; color:var(--text-muted); text-align:right; margin-top:8px;">
+              Le bouton s'active une fois le départ, l'arrivée, la date et l'heure renseignés.
+            </p>
+
+          </div>
+        </div>
+        <!-- fin panel-1 -->
+
+
+        <!-- ── ÉTAPE 2 : COORDONNÉES ─────────────────────────── -->
+        <div class="booking-panel" id="panel-2">
+          <div class="form-premium">
+
+            <span class="label-premium" style="display:block; margin-bottom:24px;">Vos coordonnées</span>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="res-nom">Nom *</label>
+                <input class="form-input" type="text" id="res-nom" placeholder="Votre nom" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="res-prenom">Prénom *</label>
+                <input class="form-input" type="text" id="res-prenom" placeholder="Votre prénom" required>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="res-tel">Téléphone *</label>
+                <input class="form-input" type="tel" id="res-tel" placeholder="+33 6 85 86 68 90" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="res-email">Email *</label>
+                <input class="form-input" type="email" id="res-email" placeholder="votre@email.fr" required>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="res-message">Précisions ou demandes particulières</label>
+              <textarea class="form-textarea" id="res-message"
+                placeholder="Numéro de vol, accueil avec pancarte, champagne à bord, besoins spéciaux…"
+                style="min-height:100px;"></textarea>
+            </div>
+
+            <label class="form-checkbox">
+              <input type="checkbox" id="res-rgpd" required>
+              <span class="form-checkbox__box"></span>
+              <span class="form-checkbox__text">J'accepte que mes données soient utilisées pour traiter ma réservation. Elles ne seront jamais transmises à des tiers. <a href="politique-confidentialite.html" style="color:var(--text-secondary);">Politique de confidentialité</a></span>
+            </label>
+
+            <div style="display:flex; justify-content:space-between; margin-top:20px; gap:12px; flex-wrap:wrap;">
+              <button type="button" class="btn btn-secondary" id="btn2-back">
+                <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="1.5" fill="none" style="margin-right:6px"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+                Retour
+              </button>
+              <button type="button" class="btn btn-primary" id="btn2-next">
+                Procéder au paiement
+                <svg class="btn-icon" viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="1.5" fill="none"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+              </button>
+            </div>
+
+          </div>
+        </div>
+        <!-- fin panel-2 -->
+
+
+        <!-- ── ÉTAPE 3 : PAIEMENT ────────────────────────────── -->
+        <div class="booking-panel" id="panel-3">
+          <div class="form-premium">
+
+            <span class="label-premium" style="display:block; margin-bottom:24px;">Paiement sécurisé</span>
+
+            <!-- Récapitulatif -->
+            <div class="pay-recap">
+              <div class="pay-recap__head">Récapitulatif de votre réservation</div>
+              <div class="pay-recap__row">
+                <span id="rc-route" style="font-weight:500; color:var(--text-primary);"></span>
+              </div>
+              <div class="pay-recap__row"><span id="rc-date"></span></div>
+              <div class="pay-recap__row"><span id="rc-pax"></span></div>
+              <div class="pay-recap__total">
+                <span>Total à payer</span>
+                <span id="rc-total" style="font-size:1.2rem;"></span>
+              </div>
+            </div>
+
+            <!-- Carte bancaire (Stripe Elements) -->
+            <div class="form-group">
+              <label class="form-label">Informations de carte bancaire</label>
+              <div id="stripe-wrap" class="stripe-wrap">
+                <div id="stripe-card"></div>
+              </div>
+              <div class="pay-error" id="pay-error"></div>
+            </div>
+
+            <!-- Badge sécurité -->
+            <div class="secure-badge">
+              <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="1.5" fill="none">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+              </svg>
+              <span>Paiement 100 % sécurisé — chiffrement SSL — Stripe ne stocke jamais vos données de carte sur nos serveurs. Black V Prestige ne voit jamais votre numéro de carte.</span>
+            </div>
+
+            <div style="display:flex; justify-content:space-between; margin-top:8px; gap:12px; flex-wrap:wrap;">
+              <button type="button" class="btn btn-secondary" id="btn3-back">
+                <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="1.5" fill="none" style="margin-right:6px"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+                Retour
+              </button>
+              <button type="button" class="btn btn-primary" id="btn-pay" style="min-width:180px; justify-content:center;">
+                <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="1.5" fill="none" style="margin-right:6px"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                <span id="btn-pay-lbl">Payer</span>
+              </button>
+            </div>
+
+          </div>
+        </div>
+        <!-- fin panel-3 -->
+
+
+        <!-- ── SUCCÈS ─────────────────────────────────────────── -->
+        <div class="booking-panel" id="panel-success">
+          <div class="booking-success">
+            <div class="booking-success__check">
+              <svg viewBox="0 0 24 24" width="32" height="32" stroke="#16a34a" stroke-width="2.5" fill="none">
+                <polyline points="20 6 9 17 4 12"/>
+              </svg>
+            </div>
+            <h2>Réservation confirmée</h2>
+            <p id="success-msg">Votre course a été réservée avec succès.</p>
+            <div class="btn-group">
+              <a href="index.html" class="btn btn-secondary">Retour à l'accueil</a>
+              <a href="contact.html" class="btn btn-primary">Nous contacter</a>
+            </div>
+          </div>
+        </div>
+        <!-- fin panel-success -->
+
+      </div>
+      <!-- fin colonne formulaire -->
+
+
+      <!-- ══════════════════════════════════════════════════════
+           SIDEBAR
+           ══════════════════════════════════════════════════════ -->
+      <aside class="booking-sidebar reveal-right">
+
+        <!-- Prix live (apparaît quand l'itinéraire est calculé) -->
+        <div class="sidebar-card" id="sc-price" style="display:none;">
+          <div class="sidebar-card__title">Votre estimation</div>
+          <span class="sidebar-price-val" id="sc-val">—</span>
+          <span class="sidebar-price-meta" id="sc-meta"></span>
+          <div style="height:1px; background:var(--border-light); margin:16px 0;"></div>
+          <p style="font-size:0.78rem; color:var(--text-muted); line-height:1.6;">Tarif à 3,50 € / km · minimum 45 € · supplément nuit +20 % (21h–6h) · supplément aéroport +10 €</p>
+        </div>
+
+        <!-- Contact direct -->
+        <div class="sidebar-card">
+          <div class="sidebar-card__title">Contact direct</div>
+          <div class="sidebar-contact">
+            <div class="sidebar-contact-item">
+              <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 014.27 11.9 19.79 19.79 0 011.21 3.3 2 2 0 013.2 1.11h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <a href="tel:+33685866890">+33 6 85 86 68 90</a>
+            </div>
+            <div class="sidebar-contact-item">
+              <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              <a href="mailto:contact@blackvprestige.fr">contact@blackvprestige.fr</a>
+            </div>
+            <div class="sidebar-contact-item">
+              <svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z" stroke="currentColor" stroke-width="1.5" fill="none"/></svg>
+              <a href="https://wa.me/33685866890">WhatsApp</a>
+            </div>
+          </div>
+          <a href="tel:+33685866890" class="btn btn-primary" style="width:100%; justify-content:center; margin-top:4px;">Appeler maintenant</a>
+        </div>
+
+        <!-- Disponibilité -->
+        <div class="sidebar-card">
+          <div class="sidebar-card__title">Disponibilité</div>
+          <div class="sidebar-contact">
+            <div class="sidebar-contact-item">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14" stroke-linecap="round"/></svg>
+              <span>24h/24 — 7j/7</span>
+            </div>
+            <div class="sidebar-contact-item">
+              <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              <span>France entière</span>
+            </div>
+            <div class="sidebar-contact-item">
+              <svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13" rx="1"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+              <span>Mercedes Classe V full options</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Ce que vous obtenez -->
+        <div class="sidebar-card" style="background:var(--grey-dark); border-color:rgba(255,255,255,0.08);">
+          <div class="sidebar-card__title" style="color:var(--white);">Ce que vous obtenez</div>
+          <div style="display:flex; flex-direction:column; gap:10px; margin-top:4px;">
+            <div style="display:flex; gap:10px; align-items:flex-start; font-size:0.83rem; color:var(--grey-light);">
+              <div style="width:6px; height:6px; background:var(--silver); flex-shrink:0; transform:rotate(45deg); margin-top:7px;"></div>
+              <span>Réservation et paiement sécurisés en ligne</span>
+            </div>
+            <div style="display:flex; gap:10px; align-items:flex-start; font-size:0.83rem; color:var(--grey-light);">
+              <div style="width:6px; height:6px; background:var(--silver); flex-shrink:0; transform:rotate(45deg); margin-top:7px;"></div>
+              <span>Confirmation email immédiate</span>
+            </div>
+            <div style="display:flex; gap:10px; align-items:flex-start; font-size:0.83rem; color:var(--grey-light);">
+              <div style="width:6px; height:6px; background:var(--silver); flex-shrink:0; transform:rotate(45deg); margin-top:7px;"></div>
+              <span>Chauffeur expérimenté, tenue irréprochable</span>
+            </div>
+            <div style="display:flex; gap:10px; align-items:flex-start; font-size:0.83rem; color:var(--grey-light);">
+              <div style="width:6px; height:6px; background:var(--silver); flex-shrink:0; transform:rotate(45deg); margin-top:7px;"></div>
+              <span>Mercedes Classe V full options</span>
+            </div>
+            <div style="display:flex; gap:10px; align-items:flex-start; font-size:0.83rem; color:var(--grey-light);">
+              <div style="width:6px; height:6px; background:var(--silver); flex-shrink:0; transform:rotate(45deg); margin-top:7px;"></div>
+              <span>Ponctualité absolue garantie</span>
+            </div>
+          </div>
+        </div>
+
+      </aside>
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__grid">
+      <div class="footer__brand">
+        <div><div class="footer__logo-title">Black V Prestige</div><span class="footer__logo-sub">Private Chauffeur Service</span></div>
+        <p class="footer__tagline">L'excellence du chauffeur privé, disponible 24h/24 et 7j/7, partout en France.</p>
+        <div class="footer__socials">
+          <a href="#" class="footer__social" aria-label="Instagram"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/></svg></a>
+          <a href="#" class="footer__social" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg></a>
+        </div>
+      </div>
+      <div class="footer__col">
+        <div class="footer__col-title">Navigation</div>
+        <div class="footer__links">
+          <a href="index.html" class="footer__link">Accueil</a>
+          <a href="services.html" class="footer__link">Services</a>
+          <a href="notre-flotte.html" class="footer__link">Notre Flotte</a>
+          <a href="experience.html" class="footer__link">Expérience</a>
+          <a href="evenements-partenaires.html" class="footer__link">Événements & Partenaires</a>
+          <a href="a-propos.html" class="footer__link">À propos</a>
+          <a href="reservation.html" class="footer__link">Réservation</a>
+          <a href="contact.html" class="footer__link">Contact</a>
+        </div>
+      </div>
+      <div class="footer__col">
+        <div class="footer__col-title">Services</div>
+        <div class="footer__links">
+          <a href="services.html#aeroport" class="footer__link">Transfert aéroport</a>
+          <a href="services.html#vip" class="footer__link">Artistes & VIP</a>
+          <a href="services.html#mise-a-disposition" class="footer__link">Mise à disposition</a>
+          <a href="services.html#mariage" class="footer__link">Mariages</a>
+        </div>
+      </div>
+      <div class="footer__col">
+        <div class="footer__col-title">Contact</div>
+        <div class="footer__contact">
+          <div class="footer__contact-item"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 014.27 11.9 19.79 19.79 0 011.21 3.3 2 2 0 013.2 1.11h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" stroke-linecap="round" stroke-linejoin="round"/></svg><a href="tel:+33685866890">+33 6 85 86 68 90</a></div>
+          <div class="footer__contact-item"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg><a href="mailto:contact@blackvprestige.fr">contact@blackvprestige.fr</a></div>
+          <div class="footer__contact-item"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14" stroke-linecap="round"/></svg><span>24h/24 — 7j/7</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span class="footer__copy">© 2024 Black V Prestige. Tous droits réservés.</span>
+      <div class="footer__legal">
+        <a href="mentions-legales.html">Mentions légales</a>
+        <a href="politique-confidentialite.html">Politique de confidentialité</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<button class="back-to-top" aria-label="Retour en haut"><svg viewBox="0 0 24 24"><path d="M18 15l-6-6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+<script src="assets/js/script.js"></script>
+<script src="assets/js/translator.js"></script>
+<script src="assets/js/booking.js"></script>
+</body>
+</html>
