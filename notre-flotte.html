@@ -201,7 +201,7 @@
     /* Card media */
     .fleet-card__media {
       position: relative;
-      aspect-ratio: 16/10;
+      aspect-ratio: 3/4;
       overflow: hidden;
     }
     .fleet-card__img {
@@ -383,16 +383,17 @@
     .fleet-showcase__gallery { position: sticky; top: 120px; }
     .fleet-showcase__main-wrap {
       position: relative;
-      aspect-ratio: 4/3;
+      aspect-ratio: 3/4;
       overflow: hidden;
       border-radius: var(--radius-md);
       border: 1px solid rgba(255,255,255,0.06);
       margin-bottom: 10px;
+      background: var(--black-deep);
     }
     .fleet-showcase__main-img {
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      object-fit: contain;
       display: block;
       transition: opacity 0.35s ease;
     }
@@ -576,11 +577,33 @@
     .fleet-modal__close:hover { background: rgba(255,255,255,0.18); }
     .fleet-modal__hero-img {
       width: 100%;
-      height: 280px;
-      object-fit: cover;
+      height: 360px;
+      object-fit: contain;
       display: block;
+      background: var(--black-deep);
       border-radius: var(--radius-md) var(--radius-md) 0 0;
+      transition: opacity 0.3s ease;
     }
+    .fleet-modal__thumbs {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+      padding: 10px 10px 0;
+      background: var(--black-deep);
+    }
+    .fleet-modal__thumb {
+      aspect-ratio: 3/4;
+      object-fit: cover;
+      border-radius: 4px;
+      cursor: pointer;
+      opacity: 0.45;
+      border: 1px solid transparent;
+      transition: opacity var(--t-fast), border-color var(--t-fast);
+      display: block;
+      width: 100%;
+    }
+    .fleet-modal__thumb.active,
+    .fleet-modal__thumb:hover { opacity: 1; border-color: var(--champagne); }
     .fleet-modal__body {
       padding: 36px 40px 44px;
     }
@@ -698,7 +721,7 @@
       .fleet-modal__specs { grid-template-columns: repeat(2,1fr); }
       .fleet-modal__feats { grid-template-columns: 1fr; }
       .fleet-modal__body { padding: 24px 22px 32px; }
-      .fleet-modal__hero-img { height: 200px; }
+      .fleet-modal__hero-img { height: 240px; }
       .fleet-card__cta { flex-direction: column; }
       .fleet-showcase__feats { grid-template-columns: 1fr; }
       .fleet-showcase__specs { grid-template-columns: repeat(3,1fr); }
@@ -771,7 +794,7 @@
 <section class="fleet-hero" aria-label="Notre flotte de véhicules">
   <div class="fleet-hero__bg" aria-hidden="true">
     <img
-      src="https://images.unsplash.com/photo-1765461734605-34657fa04db2?auto=format&fit=crop&w=1920&q=80"
+      src="assets/images/fleet/mercedes-classe-v-avant.jpg"
       alt=""
       class="fleet-hero__bg-img"
       loading="eager">
@@ -797,13 +820,13 @@
   <div class="container">
     <div class="fleet-filters" role="tablist" aria-label="Catégories de véhicules">
       <button class="fleet-filter-btn active" data-filter="all" role="tab" aria-selected="true" aria-controls="fleet-grid">
-        Tous les véhicules <span class="fleet-filter-count" id="count-all">3</span>
+        Tous les véhicules <span class="fleet-filter-count" id="count-all">4</span>
       </button>
       <button class="fleet-filter-btn" data-filter="van" role="tab" aria-selected="false">
         Van Premium <span class="fleet-filter-count">1</span>
       </button>
       <button class="fleet-filter-btn" data-filter="berline" role="tab" aria-selected="false">
-        Berline Prestige <span class="fleet-filter-count">2</span>
+        Berline Prestige <span class="fleet-filter-count">3</span>
       </button>
     </div>
   </div>
@@ -817,7 +840,7 @@
 
     <div class="fleet-grid-header reveal">
       <p class="fleet-visible-txt">
-        <strong id="fleet-visible-count">3</strong> véhicule(s) dans notre flotte
+        <strong id="fleet-visible-count">4</strong> véhicule(s) dans notre flotte
       </p>
     </div>
 
@@ -834,7 +857,7 @@
 
         <div class="fleet-card__media">
           <img
-            src="https://images.unsplash.com/photo-1765461734605-34657fa04db2?auto=format&fit=crop&w=800&q=80"
+            src="assets/images/fleet/mercedes-classe-v-avant.jpg"
             alt="Mercedes Classe V Black V Prestige — vue extérieure"
             class="fleet-card__img"
             loading="lazy">
@@ -904,7 +927,87 @@
       </article>
 
       <!-- ═══════════════════════════════════════
-           CARD 2 : Mercedes Classe S 2025 — PROCHAINEMENT
+           CARD 2 : Tesla Model 3 — ACTIF
+           ═══════════════════════════════════════ -->
+      <article
+        class="fleet-card visible reveal delay-1"
+        data-category="berline"
+        role="listitem"
+        aria-label="Tesla Model 3 — Berline Électrique">
+
+        <div class="fleet-card__media">
+          <img
+            src="assets/images/fleet/tesla-model-3-avant-mer.jpg"
+            alt="Tesla Model 3 Black V Prestige — vue avant"
+            class="fleet-card__img"
+            loading="lazy">
+          <div class="fleet-card__img-overlay" aria-hidden="true"></div>
+          <span class="fleet-card__badge">Berline Électrique</span>
+        </div>
+
+        <div class="fleet-card__body">
+          <div>
+            <h2 class="fleet-card__name">Tesla Model 3</h2>
+            <p class="fleet-card__tagline">2023 · 100% Électrique</p>
+          </div>
+
+          <div class="fleet-card__specs" aria-label="Capacités du véhicule">
+            <div class="fleet-spec-item">
+              <svg class="fleet-spec-icon" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
+                <circle cx="9" cy="7" r="4"/>
+                <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <span class="fleet-spec-val">5</span>
+              <span class="fleet-spec-lbl">Passagers</span>
+            </div>
+            <div class="fleet-spec-item">
+              <svg class="fleet-spec-icon" viewBox="0 0 24 24" aria-hidden="true">
+                <rect x="2" y="7" width="20" height="14" rx="2"/>
+                <path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2" stroke-linecap="round"/>
+              </svg>
+              <span class="fleet-spec-val">3</span>
+              <span class="fleet-spec-lbl">Bagages</span>
+            </div>
+            <div class="fleet-spec-item">
+              <svg class="fleet-spec-icon" viewBox="0 0 24 24" aria-hidden="true">
+                <rect x="3" y="3" width="18" height="18" rx="2"/>
+                <path d="M9 3v18" stroke-linecap="round"/>
+              </svg>
+              <span class="fleet-spec-val">4</span>
+              <span class="fleet-spec-lbl">Portes</span>
+            </div>
+          </div>
+
+          <ul class="fleet-card__features" aria-label="Équipements principaux">
+            <li class="fleet-feat-item">Toit vitré panoramique</li>
+            <li class="fleet-feat-item">Écran tactile 15"</li>
+            <li class="fleet-feat-item">Sièges chauffants</li>
+            <li class="fleet-feat-item">Chargeurs USB-C</li>
+            <li class="fleet-feat-item">Climatisation bi-zone</li>
+            <li class="fleet-feat-item">Conduite silencieuse</li>
+          </ul>
+
+          <div class="fleet-card__cta">
+            <button
+              class="btn btn-secondary fleet-detail-btn"
+              data-vehicle="tesla-model-3"
+              aria-haspopup="dialog"
+              aria-label="Voir les détails de la Tesla Model 3">
+              Voir les détails
+            </button>
+            <a href="reservation.html" class="btn btn-primary">
+              Réserver
+              <svg class="btn-icon" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <!-- ═══════════════════════════════════════
+           CARD 3 : Mercedes Classe S 2025 — PROCHAINEMENT
            ═══════════════════════════════════════ -->
       <article
         class="fleet-card fleet-card--coming visible reveal delay-3"
@@ -970,7 +1073,7 @@
       </article>
 
       <!-- ═══════════════════════════════════════
-           CARD 5 : BMW Série 7 2025 — PROCHAINEMENT
+           CARD 4 : BMW Série 7 2025 — PROCHAINEMENT
            ═══════════════════════════════════════ -->
       <article
         class="fleet-card fleet-card--coming visible reveal delay-4"
@@ -1064,49 +1167,48 @@
       <div class="fleet-showcase__gallery reveal-left">
         <div class="fleet-showcase__main-wrap">
           <img
-            src="https://images.unsplash.com/photo-1765461734605-34657fa04db2?auto=format&fit=crop&w=1000&q=85"
+            src="assets/images/fleet/mercedes-classe-v-avant.jpg"
             alt="Mercedes Classe V — vue extérieure"
             class="fleet-showcase__main-img"
-            id="showcase-main-img"
             loading="lazy">
         </div>
         <div class="fleet-showcase__thumbs" role="list" aria-label="Photos du véhicule">
           <img
-            src="https://images.unsplash.com/photo-1765461734605-34657fa04db2?auto=format&fit=crop&w=280&q=70"
+            src="assets/images/fleet/mercedes-classe-v-avant.jpg"
             alt="Extérieur"
             class="fleet-thumb active"
-            data-full="https://images.unsplash.com/photo-1765461734605-34657fa04db2?auto=format&fit=crop&w=1000&q=85"
+            data-full="assets/images/fleet/mercedes-classe-v-avant.jpg"
             loading="lazy"
             role="listitem"
             tabindex="0"
             aria-label="Vue extérieure">
           <img
-            src="https://images.unsplash.com/photo-1639060016125-dfde31ca1af8?auto=format&fit=crop&w=280&q=70"
-            alt="Intérieur"
+            src="assets/images/fleet/mercedes-classe-v-coffre.jpg"
+            alt="Ciel étoilé"
             class="fleet-thumb"
-            data-full="https://images.unsplash.com/photo-1639060016125-dfde31ca1af8?auto=format&fit=crop&w=1000&q=85"
+            data-full="assets/images/fleet/mercedes-classe-v-coffre.jpg"
             loading="lazy"
             role="listitem"
             tabindex="0"
-            aria-label="Vue intérieure">
+            aria-label="Ciel étoilé">
           <img
-            src="https://images.unsplash.com/photo-1765461734605-34657fa04db2?auto=format&fit=crop&w=280&q=70"
+            src="assets/images/fleet/mercedes-classe-v-profil.jpg"
             alt="Profil"
             class="fleet-thumb"
-            data-full="https://images.unsplash.com/photo-1765461734605-34657fa04db2?auto=format&fit=crop&w=1000&q=85"
+            data-full="assets/images/fleet/mercedes-classe-v-profil.jpg"
             loading="lazy"
             role="listitem"
             tabindex="0"
             aria-label="Vue de profil">
           <img
-            src="https://images.unsplash.com/photo-1765461734605-34657fa04db2?auto=format&fit=crop&w=280&q=70"
-            alt="Service"
+            src="assets/images/fleet/mercedes-classe-v-arriere.jpg"
+            alt="Arrière"
             class="fleet-thumb"
-            data-full="https://images.unsplash.com/photo-1765461734605-34657fa04db2?auto=format&fit=crop&w=1000&q=85"
+            data-full="assets/images/fleet/mercedes-classe-v-arriere.jpg"
             loading="lazy"
             role="listitem"
             tabindex="0"
-            aria-label="Service chauffeur">
+            aria-label="Vue arrière">
         </div>
       </div>
 
@@ -1180,6 +1282,126 @@
 </section>
 
 <!-- ============================================================
+     VEHICLE SHOWCASE — TESLA MODEL 3
+     ============================================================ -->
+<section class="fleet-showcase" aria-labelledby="showcase-heading-tesla" style="border-top:1px solid rgba(255,255,255,0.08);">
+  <div class="container">
+
+    <div class="fleet-showcase__header reveal">
+      <span class="label-premium" style="color:var(--silver);">En détail</span>
+      <h2 class="fleet-showcase__title" id="showcase-heading-tesla" style="text-align:center; margin-top:16px;">
+        Tesla Model 3<br><em>L'élégance silencieuse et électrique</em>
+      </h2>
+    </div>
+
+    <div class="fleet-showcase__inner">
+
+      <!-- Galerie photos -->
+      <div class="fleet-showcase__gallery reveal-left">
+        <div class="fleet-showcase__main-wrap">
+          <img
+            src="assets/images/fleet/tesla-model-3-avant-mer.jpg"
+            alt="Tesla Model 3 — vue avant"
+            class="fleet-showcase__main-img"
+            loading="lazy">
+        </div>
+        <div class="fleet-showcase__thumbs" role="list" aria-label="Photos du véhicule">
+          <img
+            src="assets/images/fleet/tesla-model-3-avant-mer.jpg"
+            alt="Face"
+            class="fleet-thumb active"
+            data-full="assets/images/fleet/tesla-model-3-avant-mer.jpg"
+            loading="lazy"
+            role="listitem"
+            tabindex="0"
+            aria-label="Vue de face">
+          <img
+            src="assets/images/fleet/tesla-model-3-arriere.jpg"
+            alt="Arrière"
+            class="fleet-thumb"
+            data-full="assets/images/fleet/tesla-model-3-arriere.jpg"
+            loading="lazy"
+            role="listitem"
+            tabindex="0"
+            aria-label="Vue arrière">
+          <img
+            src="assets/images/fleet/tesla-model-3-avant-montagne.jpg"
+            alt="En route"
+            class="fleet-thumb"
+            data-full="assets/images/fleet/tesla-model-3-avant-montagne.jpg"
+            loading="lazy"
+            role="listitem"
+            tabindex="0"
+            aria-label="En déplacement">
+        </div>
+      </div>
+
+      <!-- Contenu détaillé -->
+      <div class="fleet-showcase__content reveal-right">
+        <span class="label-premium" style="color:var(--silver);">Berline Électrique</span>
+        <h3 class="fleet-showcase__title">Tesla Model 3<br><em>2023 — 100% Électrique</em></h3>
+        <p class="fleet-showcase__desc">
+          La Tesla Model 3 offre une expérience de conduite silencieuse et moderne, idéale pour vos trajets urbains comme vos liaisons longue distance. Toit vitré panoramique, écran tactile central et confort électrique dernière génération pour un déplacement discret et sans compromis.
+        </p>
+
+        <div class="fleet-showcase__specs" role="list" aria-label="Caractéristiques techniques">
+          <div class="showcase-spec" role="listitem">
+            <span class="showcase-spec__val">5</span>
+            <span class="showcase-spec__lbl">Passagers</span>
+          </div>
+          <div class="showcase-spec" role="listitem">
+            <span class="showcase-spec__val">3</span>
+            <span class="showcase-spec__lbl">Bagages</span>
+          </div>
+          <div class="showcase-spec" role="listitem">
+            <span class="showcase-spec__val">4</span>
+            <span class="showcase-spec__lbl">Portes</span>
+          </div>
+          <div class="showcase-spec" role="listitem">
+            <span class="showcase-spec__val" style="font-size:1rem;">Model 3</span>
+            <span class="showcase-spec__lbl">Modèle</span>
+          </div>
+          <div class="showcase-spec" role="listitem">
+            <span class="showcase-spec__val" style="font-size:1rem;">2023</span>
+            <span class="showcase-spec__lbl">Année</span>
+          </div>
+          <div class="showcase-spec" role="listitem">
+            <span class="showcase-spec__val" style="font-size:0.85rem; background:var(--gradient-chrome); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;">100%</span>
+            <span class="showcase-spec__lbl">Électrique</span>
+          </div>
+        </div>
+
+        <p class="fleet-showcase__feat-title">Équipements &amp; Confort</p>
+        <div class="fleet-showcase__feats">
+          <div class="showcase-feat"><span class="showcase-feat-dot"></span>Toit vitré panoramique</div>
+          <div class="showcase-feat"><span class="showcase-feat-dot"></span>Écran tactile 15"</div>
+          <div class="showcase-feat"><span class="showcase-feat-dot"></span>Sièges chauffants avant/arrière</div>
+          <div class="showcase-feat"><span class="showcase-feat-dot"></span>Chargeurs USB-C</div>
+          <div class="showcase-feat"><span class="showcase-feat-dot"></span>Climatisation bi-zone</div>
+          <div class="showcase-feat"><span class="showcase-feat-dot"></span>Conduite 100% électrique et silencieuse</div>
+        </div>
+
+        <div class="fleet-showcase__cta">
+          <a href="reservation.html" class="btn btn-primary">
+            <svg class="btn-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M8 2v4M16 2v4M3 10h18M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            Demander un devis
+          </a>
+          <a href="tel:+33685866890" class="btn btn-secondary">
+            <svg class="btn-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 014.27 11.9 19.79 19.79 0 011.21 3.3 2 2 0 013.2 1.11h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            Appeler
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
      MODAL DÉTAILS VÉHICULE
      ============================================================ -->
 <div
@@ -1197,11 +1419,12 @@
       </svg>
     </button>
     <img
-      src="https://images.unsplash.com/photo-1765461734605-34657fa04db2?auto=format&fit=crop&w=860&q=80"
+      src="assets/images/fleet/mercedes-classe-v-avant.jpg"
       alt="Mercedes Classe V"
       class="fleet-modal__hero-img"
       id="modal-hero-img"
       loading="lazy">
+    <div class="fleet-modal__thumbs" id="modal-thumbs" role="list" aria-label="Photos du véhicule"></div>
     <div class="fleet-modal__body">
       <span class="fleet-modal__cat" id="modal-cat">Van Premium</span>
       <h2 class="fleet-modal__name" id="modal-vehicle-name">Mercedes Classe V</h2>
@@ -1427,30 +1650,79 @@
       });
     });
 
-    /* ── GALLERY THUMBNAILS ── */
-    const mainImg = document.getElementById('showcase-main-img');
-    const thumbs  = document.querySelectorAll('.fleet-thumb');
+    /* ── GALLERY THUMBNAILS (une galerie indépendante par véhicule) ── */
+    document.querySelectorAll('.fleet-showcase__gallery').forEach(gallery => {
+      const mainImg = gallery.querySelector('.fleet-showcase__main-img');
+      const thumbs  = gallery.querySelectorAll('.fleet-thumb');
+      if (!mainImg || !thumbs.length) return;
 
-    function switchThumb(thumb) {
-      if (!mainImg) return;
-      mainImg.style.opacity = '0';
-      setTimeout(() => {
-        mainImg.src = thumb.dataset.full;
-        mainImg.alt = thumb.alt;
-        mainImg.style.opacity = '1';
-      }, 180);
-      thumbs.forEach(t => t.classList.remove('active'));
-      thumb.classList.add('active');
-    }
+      function switchThumb(thumb) {
+        mainImg.style.opacity = '0';
+        setTimeout(() => {
+          mainImg.src = thumb.dataset.full;
+          mainImg.alt = thumb.alt;
+          mainImg.style.opacity = '1';
+        }, 180);
+        thumbs.forEach(t => t.classList.remove('active'));
+        thumb.classList.add('active');
+      }
 
-    thumbs.forEach(thumb => {
-      thumb.addEventListener('click', () => switchThumb(thumb));
-      thumb.addEventListener('keydown', e => {
-        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); switchThumb(thumb); }
+      thumbs.forEach(thumb => {
+        thumb.addEventListener('click', () => switchThumb(thumb));
+        thumb.addEventListener('keydown', e => {
+          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); switchThumb(thumb); }
+        });
       });
     });
 
-    /* ── MODAL ── */
+    /* ── MODAL (contenu dynamique selon le véhicule) ── */
+    const VEHICLES = {
+      'classe-v': {
+        images: [
+          'assets/images/fleet/mercedes-classe-v-avant.jpg',
+          'assets/images/fleet/mercedes-classe-v-profil.jpg',
+          'assets/images/fleet/mercedes-classe-v-arriere.jpg',
+          'assets/images/fleet/mercedes-classe-v-coffre.jpg',
+        ],
+        cat:   'Van Premium',
+        name:  'Mercedes Classe V',
+        sub:   '2024 · Full Options · Ciel étoilé',
+        desc:  'Le Mercedes Classe V dernière génération offre une expérience de transport unique : intérieur ciel étoilé, sièges en cuir pleine fleur, climatisation 4 zones et silence de roulement exceptionnel. Un véritable salon privé pour 7 passagers, disponible 24h/24, partout en France.',
+        specs: [
+          { val: '7',    lbl: 'Passagers' },
+          { val: '5',    lbl: 'Bagages' },
+          { val: '5',    lbl: 'Portes' },
+          { val: '2024', lbl: 'Année' },
+        ],
+        feats: [
+          'Ciel étoilé LED', 'Climatisation 4 zones', 'Vitres teintées', 'Sièges cuir pleine fleur',
+          'WiFi haut débit', 'Chargeurs USB & USB-C', 'Écrans multimédia', 'Isolation phonique',
+          'Coffre grande capacité', 'Rafraîchissements inclus',
+        ],
+      },
+      'tesla-model-3': {
+        images: [
+          'assets/images/fleet/tesla-model-3-avant-mer.jpg',
+          'assets/images/fleet/tesla-model-3-arriere.jpg',
+          'assets/images/fleet/tesla-model-3-avant-montagne.jpg',
+        ],
+        cat:   'Berline Électrique',
+        name:  'Tesla Model 3',
+        sub:   '2023 · 100% Électrique',
+        desc:  'La Tesla Model 3 offre une expérience de conduite silencieuse et moderne, idéale pour vos trajets urbains comme vos liaisons longue distance. Toit vitré panoramique, écran tactile central et confort électrique dernière génération pour un déplacement discret et sans compromis.',
+        specs: [
+          { val: '5',       lbl: 'Passagers' },
+          { val: '3',       lbl: 'Bagages' },
+          { val: '4',       lbl: 'Portes' },
+          { val: '2023',    lbl: 'Année' },
+        ],
+        feats: [
+          'Toit vitré panoramique', 'Écran tactile 15"', 'Sièges chauffants avant/arrière',
+          'Chargeurs USB-C', 'Climatisation bi-zone', 'Conduite 100% électrique et silencieuse',
+        ],
+      },
+    };
+
     const backdrop     = document.getElementById('fleet-modal-backdrop');
     const modal        = document.getElementById('fleet-modal');
     const closeBtns    = [
@@ -1458,9 +1730,72 @@
       document.getElementById('fleet-modal-close-btn'),
     ];
     const detailBtns   = document.querySelectorAll('.fleet-detail-btn');
+    const modalHeroImg = document.getElementById('modal-hero-img');
+    const modalThumbs  = document.getElementById('modal-thumbs');
+    const modalCat     = document.getElementById('modal-cat');
+    const modalName    = document.getElementById('modal-vehicle-name');
+    const modalSub     = document.getElementById('modal-sub');
+    const modalDesc    = document.getElementById('modal-desc');
+    const modalSpecs   = document.querySelector('.fleet-modal__specs');
+    const modalFeats   = document.querySelector('.fleet-modal__feats');
     let   lastFocused  = null;
 
-    function openModal() {
+    function fillModal(vehicleId) {
+      const v = VEHICLES[vehicleId];
+      if (!v) return;
+
+      modalHeroImg.src = v.images[0];
+      modalHeroImg.alt = v.name;
+
+      modalThumbs.innerHTML = v.images.map((src, i) => `
+        <img
+          src="${src}"
+          alt="${v.name} — photo ${i + 1}"
+          class="fleet-modal__thumb${i === 0 ? ' active' : ''}"
+          data-full="${src}"
+          loading="lazy"
+          role="listitem"
+          tabindex="0">`
+      ).join('');
+
+      modalThumbs.querySelectorAll('.fleet-modal__thumb').forEach(thumb => {
+        const pick = () => {
+          modalHeroImg.style.opacity = '0';
+          setTimeout(() => {
+            modalHeroImg.src = thumb.dataset.full;
+            modalHeroImg.alt = thumb.alt;
+            modalHeroImg.style.opacity = '1';
+          }, 150);
+          modalThumbs.querySelectorAll('.fleet-modal__thumb').forEach(t => t.classList.remove('active'));
+          thumb.classList.add('active');
+        };
+        thumb.addEventListener('click', pick);
+        thumb.addEventListener('keydown', e => {
+          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); pick(); }
+        });
+      });
+
+      modalCat.textContent  = v.cat;
+      modalName.textContent = v.name;
+      modalSub.textContent  = v.sub;
+      modalDesc.textContent = v.desc;
+
+      modalSpecs.innerHTML = v.specs.map(s => {
+        const style = s.val.length > 2 ? ' style="font-size:0.88rem;"' : '';
+        return `
+        <div class="modal-spec" role="listitem">
+          <span class="modal-spec__val"${style}>${s.val}</span>
+          <span class="modal-spec__lbl">${s.lbl}</span>
+        </div>`;
+      }).join('');
+
+      modalFeats.innerHTML = v.feats.map(f =>
+        `<div class="modal-feat"><span class="modal-feat-dot"></span>${f}</div>`
+      ).join('');
+    }
+
+    function openModal(vehicleId) {
+      fillModal(vehicleId);
       lastFocused = document.activeElement;
       backdrop.classList.add('open');
       backdrop.setAttribute('aria-hidden', 'false');
@@ -1479,7 +1814,7 @@
       if (lastFocused) lastFocused.focus();
     }
 
-    detailBtns.forEach(btn => btn.addEventListener('click', openModal));
+    detailBtns.forEach(btn => btn.addEventListener('click', () => openModal(btn.dataset.vehicle)));
     closeBtns.forEach(btn => { if (btn) btn.addEventListener('click', closeModal); });
     backdrop.addEventListener('click', e => { if (e.target === backdrop) closeModal(); });
     document.addEventListener('keydown', e => {

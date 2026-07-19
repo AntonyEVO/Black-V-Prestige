@@ -5,6 +5,19 @@
    pré-remplit l'étape 1 du parcours de réservation complet.
    ================================================================ */
 
+/* ── Diaporama de la bannière plein écran ─────────────────────── */
+(function () {
+  const imgs = document.querySelectorAll('.hero2__bg-img');
+  if (imgs.length < 2) return;
+
+  let i = 0;
+  setInterval(() => {
+    imgs[i].classList.remove('active');
+    i = (i + 1) % imgs.length;
+    imgs[i].classList.add('active');
+  }, 6000);
+})();
+
 (function () {
   const form = document.getElementById('hero-submit');
   if (!form) return;
