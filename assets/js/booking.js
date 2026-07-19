@@ -14,9 +14,8 @@
    ================================================================ */
 
 // ── CONFIGURATION ──────────────────────────────────────────────────────────
-const TARIF_KM       = 3.50;   // € par kilomètre
+const TARIF_KM       = 3.00;   // € par kilomètre, identique de jour comme de nuit
 const TARIF_MIN      = 45;     // course minimum
-const SURCHARGE_NUIT = 0.20;   // +20 % entre 21h et 6h
 const SURCHARGE_AERO = 10;     // +10 € si aéroport détecté
 
 // ↓↓↓ REMPLIR APRÈS CRÉATION DU COMPTE STRIPE ↓↓↓
@@ -69,16 +68,20 @@ function esc(s) {
 // français : bien plus précise que Nominatim sur les numéros de rue en
 // France. Nominatim reste utilisé en complément pour les lieux hors BAN
 // (aéroports, Monaco, étranger...).
+const BAN_MIN_SCORE = 0.55; // sous ce score, la BAN "invente" une correspondance peu fiable (ex: noms de lieux/aéroports)
+
 async function searchBAN(q) {
   try {
     const r = await fetch(`https://api-adresse.data.gouv.fr/search/?q=${encodeURIComponent(q)}&limit=5`);
     const data = await r.json();
-    return (data.features || []).map(f => ({
-      name: f.properties.name || f.properties.label,
-      city: [f.properties.postcode, f.properties.city].filter(Boolean).join(' '),
-      lat:  f.geometry.coordinates[1],
-      lon:  f.geometry.coordinates[0]
-    }));
+    return (data.features || [])
+      .filter(f => (f.properties.score || 0) >= BAN_MIN_SCORE)
+      .map(f => ({
+        name: f.properties.name || f.properties.label,
+        city: [f.properties.postcode, f.properties.city].filter(Boolean).join(' '),
+        lat:  f.geometry.coordinates[1],
+        lon:  f.geometry.coordinates[0]
+      }));
   } catch { return []; }
 }
 
@@ -195,17 +198,14 @@ async function maybeRoute() {
 
 // ── CALCUL DU PRIX ─────────────────────────────────────────────────────────
 function calcPrice() {
-  const h = booking.time ? parseInt(booking.time.split(':')[0]) : 12;
-  const night   = h >= 21 || h < 6;
   const fromLow = (booking.from?.label || '').toLowerCase();
   const toLow   = (booking.to?.label   || '').toLowerCase();
   const AERO_WORDS = ['aéroport', 'aeroport', 'airport', 'côte d\'azur terminal'];
   const airport = AERO_WORDS.some(k => fromLow.includes(k) || toLow.includes(k));
 
   const base = Math.max(booking.distKm * TARIF_KM, TARIF_MIN);
-  const nSur = night   ? base * SURCHARGE_NUIT : 0;
-  const aSur = airport ? SURCHARGE_AERO        : 0;
-  return { base, nSur, aSur, total: base + nSur + aSur, night, airport };
+  const aSur = airport ? SURCHARGE_AERO : 0;
+  return { base, aSur, total: base + aSur, airport };
 }
 
 function renderCalc() {
@@ -218,10 +218,6 @@ function renderCalc() {
   document.getElementById('pr-meta').textContent   = `${booking.distKm.toFixed(1)} km — ${fmtDur(booking.durMin)}`;
   document.getElementById('pr-km').textContent     = `${booking.distKm.toFixed(1)} km`;
   document.getElementById('pr-km-val').textContent = fmtEur(booking.distKm * TARIF_KM);
-
-  const nightRow = document.getElementById('pr-night-row');
-  nightRow.style.display = p.night ? 'flex' : 'none';
-  document.getElementById('pr-night-val').textContent = '+' + fmtEur(p.nSur);
 
   const aeroRow = document.getElementById('pr-aero-row');
   aeroRow.style.display = p.airport ? 'flex' : 'none';
@@ -248,10 +244,8 @@ function showCalc(mode) {
   result.style.display  = mode === 'result'  ? 'block' : 'none';
 }
 
-// Recalcul si l'heure change (impact supplément nuit)
 document.getElementById('res-heure').addEventListener('change', e => {
   booking.time = e.target.value;
-  if (booking.distKm !== null) renderCalc();
   refreshBtn1();
 });
 document.getElementById('res-date').addEventListener('change', e => {

@@ -43,16 +43,20 @@
   // BAN (api-adresse.data.gouv.fr) = API officielle du gouvernement français,
   // bien plus précise que Nominatim sur les numéros de rue. Nominatim reste
   // utilisé en complément pour les lieux hors BAN (aéroports, Monaco...).
+  const BAN_MIN_SCORE = 0.55; // sous ce score, la BAN "invente" une correspondance peu fiable (ex: noms de lieux/aéroports)
+
   async function searchBAN(q) {
     try {
       const r = await fetch(`https://api-adresse.data.gouv.fr/search/?q=${encodeURIComponent(q)}&limit=5`);
       const data = await r.json();
-      return (data.features || []).map(f => ({
-        name: f.properties.name || f.properties.label,
-        city: [f.properties.postcode, f.properties.city].filter(Boolean).join(' '),
-        lat:  f.geometry.coordinates[1],
-        lon:  f.geometry.coordinates[0]
-      }));
+      return (data.features || [])
+        .filter(f => (f.properties.score || 0) >= BAN_MIN_SCORE)
+        .map(f => ({
+          name: f.properties.name || f.properties.label,
+          city: [f.properties.postcode, f.properties.city].filter(Boolean).join(' '),
+          lat:  f.geometry.coordinates[1],
+          lon:  f.geometry.coordinates[0]
+        }));
     } catch { return []; }
   }
 
