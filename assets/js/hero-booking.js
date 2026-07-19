@@ -1,8 +1,8 @@
 /* ================================================================
    BLACK V PRESTIGE — WIDGET DE RÉSERVATION RAPIDE (BANNIÈRE ACCUEIL)
-   Autocomplete via Nominatim (OpenStreetMap), puis transmission des
-   données à la page reservation.html qui calcule l'itinéraire et
-   pré-remplit l'étape 1 du parcours de réservation complet.
+   Autocomplete via la Base Adresse Nationale (gouv.fr) + Nominatim en
+   complément, puis transmission des données à la page reservation.html
+   qui calcule l'itinéraire et pré-remplit l'étape 1 du parcours complet.
    ================================================================ */
 
 /* ── Diaporama de la bannière plein écran ─────────────────────── */
@@ -40,25 +40,50 @@
       .replace(/>/g, '&gt;');
   }
 
-  async function nominatim(q) {
-    if (q.length < 3) return [];
+  // BAN (api-adresse.data.gouv.fr) = API officielle du gouvernement français,
+  // bien plus précise que Nominatim sur les numéros de rue. Nominatim reste
+  // utilisé en complément pour les lieux hors BAN (aéroports, Monaco...).
+  async function searchBAN(q) {
     try {
-      const r = await fetch(
-        `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(q)}&format=json&limit=6&accept-language=fr`,
-        { headers: { 'Accept-Language': 'fr' } }
-      );
-      return await r.json();
+      const r = await fetch(`https://api-adresse.data.gouv.fr/search/?q=${encodeURIComponent(q)}&limit=5`);
+      const data = await r.json();
+      return (data.features || []).map(f => ({
+        name: f.properties.name || f.properties.label,
+        city: [f.properties.postcode, f.properties.city].filter(Boolean).join(' '),
+        lat:  f.geometry.coordinates[1],
+        lon:  f.geometry.coordinates[0]
+      }));
     } catch { return []; }
   }
 
-  function parsePlace(p) {
-    const parts = p.display_name.split(', ');
-    return {
-      name: parts.slice(0, 2).join(', '),
-      city: parts.slice(2, 4).join(', '),
-      lat:  parseFloat(p.lat),
-      lon:  parseFloat(p.lon)
-    };
+  async function searchNominatim(q) {
+    try {
+      const r = await fetch(
+        `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(q)}&format=json&limit=4&accept-language=fr`,
+        { headers: { 'Accept-Language': 'fr' } }
+      );
+      const raw = await r.json();
+      return raw.map(p => {
+        const parts = p.display_name.split(', ');
+        return {
+          name: parts.slice(0, 2).join(', '),
+          city: parts.slice(2, 4).join(', '),
+          lat:  parseFloat(p.lat),
+          lon:  parseFloat(p.lon)
+        };
+      });
+    } catch { return []; }
+  }
+
+  async function searchAddresses(q) {
+    if (q.length < 3) return [];
+    const [ban, nom] = await Promise.all([searchBAN(q), searchNominatim(q)]);
+    const merged = [...ban];
+    nom.forEach(np => {
+      const dup = merged.some(bp => bp.name.toLowerCase() === np.name.toLowerCase());
+      if (!dup) merged.push(np);
+    });
+    return merged.slice(0, 6);
   }
 
   function setupAC(inputId, listId, stateKey) {
@@ -68,8 +93,7 @@
     let places = [], focused = -1;
 
     const search = debounce(async (v) => {
-      const raw = await nominatim(v);
-      places  = raw.map(parsePlace);
+      places  = await searchAddresses(v);
       focused = -1;
       renderList();
     }, 380);
