@@ -19,9 +19,8 @@ const SURCHARGE_AERO = 10;     // +10 € si aéroport détecté
 // ↓↓↓ REMPLIR APRÈS CRÉATION DU COMPTE STRIPE ↓↓↓
 // Clé publique Stripe (pk_test_... ou pk_live_...)
 const STRIPE_PK = 'pk_test_51Ttse5D6PlGTZslBFZ2Vv7YMsS9hnjajwi3ohNNhfoKMUA3RECzzVhb2QUWZLBU3JvVIPA3UO3WEWoWU8LIzJO82008ThF7QTj';
-// URL du backend local ou déployé (stripe-server.js)
-// TODO : remplacer par l'URL Render une fois le backend déployé (étape suivante)
-const BACKEND_URL = 'http://localhost:3000/create-payment-intent';
+// URL du backend déployé (fonction serverless Vercel)
+const BACKEND_URL = 'https://black-v-prestige.vercel.app/api/create-payment-intent';
 // ↑↑↑ ───────────────────────────────────────────────
 
 // ── ÉTAT GLOBAL ────────────────────────────────────────────────────────────
