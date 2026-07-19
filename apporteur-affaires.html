@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Apporteur d'affaires — Black V Prestige | Programme de commission</title>
+  <meta name="description" content="Devenez apporteur d'affaires Black V Prestige : touchez une commission de 5% à 20% en recommandant notre service de chauffeur privé haut de gamme à vos clients.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
+  <link rel="stylesheet" href="assets/css/style.css">
+
+  <style>
+    /* ── HERO APPORTEUR — image + carte flottante ─────────────── */
+    .partner-hero {
+      position: relative;
+      min-height: 640px;
+      display: flex;
+      align-items: center;
+      padding: 150px 0 70px;
+      overflow: hidden;
+    }
+    .partner-hero__bg {
+      position: absolute; inset: 0; z-index: 0;
+    }
+    .partner-hero__bg img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+    }
+    .partner-hero__bg::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(100deg, rgba(3,3,3,0.9) 0%, rgba(3,3,3,0.65) 42%, rgba(3,3,3,0.35) 75%, rgba(3,3,3,0.55) 100%);
+    }
+    .partner-hero__grid {
+      position: relative; z-index: 2;
+      display: grid; grid-template-columns: 1.1fr 0.9fr;
+      gap: 48px; align-items: center;
+    }
+    .partner-hero__text { display: flex; flex-direction: column; gap: 20px; }
+    .partner-hero__title {
+      font-family: var(--font-serif); font-weight: 500; color: var(--white);
+      font-size: clamp(1.9rem, 3.4vw, 3rem); line-height: 1.18; letter-spacing: -0.01em;
+    }
+    .partner-hero__sub { font-size: 0.95rem; line-height: 1.75; color: rgba(255,255,255,0.65); max-width: 460px; }
+
+    .partner-form-card {
+      background: var(--white); border-radius: 16px; box-shadow: 0 30px 70px rgba(0,0,0,0.45);
+      padding: 30px 32px; display: flex; flex-direction: column; gap: 16px;
+    }
+    .partner-form-card__title { font-family: var(--font-serif); font-size: 1.15rem; font-weight: 500; color: var(--text-primary); }
+    .form-divider { display: flex; align-items: center; gap: 12px; font-size: 0.68rem; letter-spacing: 0.18em; color: var(--text-muted); }
+    .form-divider::before, .form-divider::after { content: ''; flex: 1; height: 1px; background: var(--border-medium); }
+    .file-drop { border: 1px dashed var(--border-medium); border-radius: var(--radius-sm); padding: 14px 16px; display: flex; flex-direction: column; gap: 8px; }
+    .file-drop input[type="file"] { font-size: 0.78rem; color: var(--text-secondary); }
+    .file-drop small { font-size: 0.72rem; color: var(--text-muted); line-height: 1.5; }
+    .file-drop small a { color: var(--text-primary); text-decoration: underline; }
+    .partner-hint { font-size: 0.74rem; color: #c0392b; min-height: 1em; opacity: 0; transition: opacity var(--t-fast); }
+    .partner-hint.show { opacity: 1; }
+
+    /* ── AVANTAGES (3 colonnes icône) ─────────────────────────── */
+    .partner-benefits { display: grid; grid-template-columns: repeat(3,1fr); gap: 40px; margin-top: 48px; }
+    .partner-benefit__icon {
+      width: 46px; height: 46px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.18);
+      display: flex; align-items: center; justify-content: center; margin-bottom: 18px; color: var(--silver);
+    }
+    .partner-benefit__icon svg { width: 20px; height: 20px; stroke: currentColor; fill: none; stroke-width: 1.5; }
+    .partner-benefit__title { font-family: var(--font-serif); font-size: 1.05rem; font-weight: 500; color: var(--white); margin-bottom: 10px; }
+    .partner-benefit__text { font-size: 0.85rem; line-height: 1.7; color: rgba(255,255,255,0.6); }
+
+    /* ── 4 ÉTAPES (photo + texte, empilé) ─────────────────────── */
+    .step-row { display: grid; grid-template-columns: 260px 1fr; gap: 36px; align-items: center; padding: 32px 0; border-top: 1px solid rgba(255,255,255,0.07); }
+    .step-row:first-of-type { border-top: none; }
+    .step-row__img { border-radius: var(--radius-md); overflow: hidden; aspect-ratio: 4/3; }
+    .step-row__img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .step-row__num { font-family: var(--font-serif); font-size: 0.75rem; letter-spacing: 0.2em; color: var(--silver); margin-bottom: 10px; display: block; }
+    .step-row__title { font-family: var(--font-serif); font-size: 1.2rem; font-weight: 500; color: var(--white); margin-bottom: 12px; }
+    .step-row__text { font-size: 0.88rem; line-height: 1.75; color: rgba(255,255,255,0.6); max-width: 620px; }
+
+    @media (max-width: 1024px) {
+      .partner-hero__grid { grid-template-columns: 1fr; }
+      .partner-benefits { grid-template-columns: 1fr; gap: 32px; }
+    }
+    @media (max-width: 768px) {
+      .partner-hero { min-height: auto; padding: 130px 0 50px; }
+      .step-row { grid-template-columns: 1fr; gap: 18px; padding: 24px 0; }
+      .step-row__img { max-width: 320px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="navbar__inner">
+    <a href="index.html" class="navbar__logo">
+      <span class="navbar__logo-title">Black V Prestige</span>
+      <span class="navbar__logo-subtitle">Private Chauffeur Service</span>
+    </a>
+    <div class="navbar__nav">
+      <a href="index.html"                  class="navbar__link">Accueil</a>
+            <div class="navbar__dropdown">
+        <button class="navbar__link navbar__dropdown-btn" aria-haspopup="true" aria-expanded="false">Services<svg class="navbar__dropdown-caret" width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></button>
+        <div class="navbar__dropdown-menu" role="menu">
+          <a href="services.html" class="navbar__dropdown-item" role="menuitem">Nos Services</a>
+          <a href="experience.html" class="navbar__dropdown-item" role="menuitem">L'Expérience</a>
+          <a href="apporteur-affaires.html" class="navbar__dropdown-item" role="menuitem">Apporteur d'affaires</a>
+        </div>
+      </div>
+      <a href="notre-flotte.html"               class="navbar__link">Notre Flotte</a>
+      <a href="evenements-partenaires.html" class="navbar__link">Événements</a>
+      <a href="a-propos.html"               class="navbar__link">À propos</a>
+      <a href="contact.html"                class="navbar__link">Contact</a>
+    </div>
+    <a href="reservation.html" class="btn btn-primary navbar__cta">Réserver</a>
+    <button class="navbar__burger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<div class="mobile-menu">
+  <button class="mobile-menu__close" aria-label="Fermer"><svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="1.5" fill="none"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+  <nav class="mobile-menu__nav">
+    <a href="index.html"                  class="mobile-menu__link">Accueil</a>
+    <a href="services.html"               class="mobile-menu__link">Services</a>
+    <a href="experience.html" class="mobile-menu__link mobile-menu__link--sub">L'Expérience</a>
+    <a href="notre-flotte.html"               class="mobile-menu__link">Notre Flotte</a>
+    <a href="evenements-partenaires.html" class="mobile-menu__link">Événements</a>
+    <a href="apporteur-affaires.html"     class="mobile-menu__link">Apporteur d'affaires</a>
+    <a href="a-propos.html"               class="mobile-menu__link">À propos</a>
+    <a href="contact.html"                class="mobile-menu__link">Contact</a>
+  </nav>
+  <a href="reservation.html" class="btn btn-primary">Réserver</a>
+  <div class="mobile-menu__contact" style="margin-top:32px;"><a href="tel:+33685866890">+33 6 85 86 68 90</a><a href="mailto:blackvprestige@gmail.com">blackvprestige@gmail.com</a></div>
+</div>
+
+<!-- ============================================================
+     HERO — Programme apporteur d'affaires
+     ============================================================ -->
+<section class="partner-hero">
+  <div class="partner-hero__bg" aria-hidden="true">
+    <img src="assets/images/partners/partner-hero.jpg" alt="">
+  </div>
+  <div class="container partner-hero__grid">
+
+    <div class="partner-hero__text">
+      <span class="label-premium" style="color:var(--silver);">Programme Partenaire</span>
+      <h1 class="partner-hero__title">Touchez une commission de 5&nbsp;% à 20&nbsp;% en recommandant nos services</h1>
+      <p class="partner-hero__sub">Collaborez avec Black V Prestige pour offrir à vos clients une expérience de transport haut de gamme, et soyez récompensé pour chaque référence réussie.</p>
+    </div>
+
+    <div class="partner-form-card reveal-right">
+      <div class="partner-form-card__title">Envoyez votre demande maintenant</div>
+
+      <form id="partner-form" novalidate>
+
+        <!-- ── ÉTAPE 1 ── -->
+        <div class="booking-panel active" id="p-panel-1" style="display:flex; flex-direction:column; gap:16px;">
+          <div class="form-group">
+            <label class="form-label" for="p-lieu">Lieu de prise en charge</label>
+            <input class="form-input" type="text" id="p-lieu" placeholder="Ville ou adresse">
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="p-date-debut">Date de début</label>
+              <input class="form-input" type="date" id="p-date-debut">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="p-date-fin">Date de fin</label>
+              <input class="form-input" type="date" id="p-date-fin">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="p-message">Expliquez-nous votre demande</label>
+            <textarea class="form-textarea" id="p-message" placeholder="Décrivez l'organisation globale de votre projet : les trajets souhaités, le véhicule de préférence, etc." style="min-height:90px;"></textarea>
+          </div>
+
+          <div class="form-divider">OU</div>
+
+          <div class="file-drop">
+            <label class="form-label" for="p-csv">Transmettez-nous un tableur détaillant l'organisation de votre projet</label>
+            <input type="file" id="p-csv" accept=".csv">
+            <small>Besoin d'un modèle de programme ? <a href="assets/files/modele-programme-apporteur.csv" download>Téléchargez-le ici</a>.</small>
+          </div>
+
+          <button type="button" class="btn btn-primary" id="p-btn1-next" style="justify-content:center;">
+            Suivant
+            <svg class="btn-icon" viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="1.5" fill="none"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </button>
+          <p class="partner-hint" id="p-hint-1">Merci de renseigner au moins votre demande (message ou fichier).</p>
+        </div>
+
+        <!-- ── ÉTAPE 2 ── -->
+        <div class="booking-panel" id="p-panel-2" style="display:none; flex-direction:column; gap:16px;">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="p-prenom">Prénom *</label>
+              <input class="form-input" type="text" id="p-prenom" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="p-nom">Nom *</label>
+              <input class="form-input" type="text" id="p-nom" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="p-entreprise">Nom de l'entreprise</label>
+            <input class="form-input" type="text" id="p-entreprise" placeholder="Hôtel, agence, conciergerie…">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="p-secteur">Secteur d'activité</label>
+            <select class="form-select" id="p-secteur">
+              <option value="">Sélectionner…</option>
+              <option>Wedding planner</option>
+              <option>Agence événementielle</option>
+              <option>Hôtel / Palace</option>
+              <option>Conciergerie</option>
+              <option>Agence de voyage</option>
+              <option>Autre</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="p-email">Email *</label>
+              <input class="form-input" type="email" id="p-email" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="p-tel">Téléphone</label>
+              <input class="form-input" type="tel" id="p-tel" placeholder="+33 6 85 86 68 90">
+            </div>
+          </div>
+          <label class="form-checkbox">
+            <input type="checkbox" id="p-rgpd">
+            <span class="form-checkbox__box"></span>
+            <span class="form-checkbox__text">J'accepte que mes informations soient utilisées pour être recontacté(e) dans le cadre de ce programme.</span>
+          </label>
+          <div style="display:flex; gap:10px;">
+            <button type="button" class="btn btn-secondary" id="p-btn2-back">Retour</button>
+            <button type="submit" class="btn btn-primary" id="p-btn-send" style="flex:1; justify-content:center;">Envoyer ma demande</button>
+          </div>
+          <p class="partner-hint" id="p-hint-2">Merci de remplir tous les champs obligatoires et d'accepter les conditions.</p>
+        </div>
+
+        <!-- ── SUCCÈS ── -->
+        <div id="p-panel-success" style="display:none; text-align:center; padding:12px 0;">
+          <div style="width:52px; height:52px; border-radius:50%; background:var(--warm); display:flex; align-items:center; justify-content:center; margin:0 auto 16px; color:#2e7d32;">
+            <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <p style="font-family:var(--font-serif); font-size:1.1rem; margin-bottom:8px;">Demande envoyée</p>
+          <p style="font-size:0.85rem; color:var(--text-muted); line-height:1.6;">Merci pour votre demande. Notre équipe revient vers vous très rapidement pour organiser un appel de découverte.</p>
+        </div>
+
+      </form>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================================================
+     POURQUOI RECOMMANDER
+     ============================================================ -->
+<section class="section section--carbon">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="label-premium">Nos avantages</span>
+      <h2 class="section-title">Pourquoi recommander Black V Prestige&nbsp;?</h2>
+    </div>
+
+    <div class="partner-benefits">
+      <div class="reveal">
+        <div class="partner-benefit__icon"><svg viewBox="0 0 24 24"><circle cx="8" cy="8" r="6"/><circle cx="16" cy="16" r="6" fill="none"/><path d="M8 8l0.01 0"/></svg></div>
+        <div class="partner-benefit__title">Collaboration rentable</div>
+        <p class="partner-benefit__text">Nous offrons une commission attractive pour chaque mise en relation réussie, ce qui vous permet de générer des revenus supplémentaires simplement en nous recommandant à vos clients.</p>
+      </div>
+      <div class="reveal delay-1">
+        <div class="partner-benefit__icon"><svg viewBox="0 0 24 24"><path d="M12 2l4 6h6l-9 14L4 8h6l2-6z"/></svg></div>
+        <div class="partner-benefit__title">Image de marque renforcée</div>
+        <p class="partner-benefit__text">En recommandant notre service de chauffeur privé haut de gamme à vos clients, vous renforcez votre image de marque tout en leur offrant une solution de transport d'exception.</p>
+      </div>
+      <div class="reveal delay-2">
+        <div class="partner-benefit__icon"><svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="13" rx="2"/><path d="M8 21h8M12 17v4"/><circle cx="12" cy="10" r="2"/></svg></div>
+        <div class="partner-benefit__title">Réservation et facturation centralisées</div>
+        <p class="partner-benefit__text">Notre plateforme de réservation facilite la prise en charge de vos clients avec une facturation centralisée. Vous conservez le contrôle total de vos commissions.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     GÉNÉREZ DES REVENUS
+     ============================================================ -->
+<section class="section section--carbon" style="padding-top:0;">
+  <div class="container">
+    <div class="two-col">
+      <div class="two-col__image reveal-left">
+        <img src="assets/images/partners/partner-revenue.jpg" alt="Générez des revenus avec Black V Prestige" loading="lazy">
+        <div class="two-col__image-frame" aria-hidden="true"></div>
+      </div>
+      <div class="two-col__text reveal-right">
+        <h2 class="section-title" style="color:var(--white);">Générez des revenus supplémentaires en assurant le transport de vos clients</h2>
+        <p class="body-text" style="color:rgba(255,255,255,0.6);">
+          Wedding planners, agences événementielles, hôtels, conciergeries, agences de voyage&nbsp;: recommandez notre service de chauffeur privé à vos clients et soyez rémunérés pour cela.
+        </p>
+        <p class="body-text" style="color:rgba(255,255,255,0.6);">
+          En période de forte demande, offrez-leur une expérience haut de gamme et générez des revenus supplémentaires grâce à notre programme de commissionnement.
+        </p>
+        <a href="#partner-form" class="btn btn-primary" style="align-self:flex-start; margin-top:8px;">Demander un devis</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     4 ÉTAPES
+     ============================================================ -->
+<section class="section section--carbon">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="label-premium">Comment ça marche</span>
+      <h2 class="section-title">4 étapes pour commencer à profiter de cette opportunité</h2>
+    </div>
+
+    <div style="margin-top:24px;">
+      <div class="step-row reveal">
+        <div class="step-row__img"><img src="assets/images/partners/partner-step1.jpg" alt="Appel de découverte" loading="lazy"></div>
+        <div>
+          <span class="step-row__num">01</span>
+          <h3 class="step-row__title">Appel de découverte</h3>
+          <p class="step-row__text">Lors de notre appel de découverte initial, nous prenons le temps de comprendre vos besoins et objectifs en matière de partenariat. Nous discutons de votre activité, de votre clientèle cible et de vos attentes.</p>
+        </div>
+      </div>
+      <div class="step-row reveal delay-1">
+        <div class="step-row__img"><img src="assets/images/partners/partner-step2.jpg" alt="Commencez à recommander nos services" loading="lazy"></div>
+        <div>
+          <span class="step-row__num">02</span>
+          <h3 class="step-row__title">Commencez à recommander nos services à vos clients</h3>
+          <p class="step-row__text">Une fois les termes de notre partenariat définis, vous pouvez commencer à recommander nos services à vos clients. Nous vous fournissons tous les outils nécessaires pour les présenter efficacement.</p>
+        </div>
+      </div>
+      <div class="step-row reveal delay-2">
+        <div class="step-row__img"><img src="assets/images/partners/partner-step3.jpg" alt="Formation à notre outil" loading="lazy"></div>
+        <div>
+          <span class="step-row__num">03</span>
+          <h3 class="step-row__title">Formation à notre outil</h3>
+          <p class="step-row__text">Nous vous offrons une formation complète sur notre outil de réservation en ligne, pour réserver facilement des trajets pour vos clients en toute simplicité.</p>
+        </div>
+      </div>
+      <div class="step-row reveal delay-3">
+        <div class="step-row__img"><img src="assets/images/partners/partner-step4.jpg" alt="Recevez vos premières commissions" loading="lazy"></div>
+        <div>
+          <span class="step-row__num">04</span>
+          <h3 class="step-row__title">Recevez vos premières commissions</h3>
+          <p class="step-row__text">Dès que vous commencez à recommander nos services avec succès, vous gagnez des commissions. Chaque référence réussie se traduit par une commission, dès la première réservation confirmée.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__grid">
+      <div class="footer__brand">
+        <div><div class="footer__logo-title">Black V Prestige</div><span class="footer__logo-sub">Private Chauffeur Service</span></div>
+        <p class="footer__tagline">L'excellence du chauffeur privé, disponible 24h/24 et 7j/7, partout en France.</p>
+        <div class="footer__socials">
+          <a href="#" class="footer__social" aria-label="Instagram"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/></svg></a>
+          <a href="#" class="footer__social" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg></a>
+        </div>
+      </div>
+      <div class="footer__col">
+        <div class="footer__col-title">Navigation</div>
+        <div class="footer__links">
+          <a href="index.html" class="footer__link">Accueil</a>
+          <a href="services.html" class="footer__link">Services</a>
+          <a href="notre-flotte.html" class="footer__link">Notre Flotte</a>
+          <a href="experience.html" class="footer__link">Expérience</a>
+          <a href="evenements-partenaires.html" class="footer__link">Événements & Partenaires</a>
+          <a href="a-propos.html" class="footer__link">À propos</a>
+          <a href="reservation.html" class="footer__link">Réservation</a>
+          <a href="contact.html" class="footer__link">Contact</a>
+        </div>
+      </div>
+      <div class="footer__col">
+        <div class="footer__col-title">Opportunités</div>
+        <div class="footer__links">
+          <a href="apporteur-affaires.html" class="footer__link">Apporteur d'affaires</a>
+          <a href="evenements-partenaires.html" class="footer__link">Devenir partenaire</a>
+        </div>
+      </div>
+      <div class="footer__col">
+        <div class="footer__col-title">Contact</div>
+        <div class="footer__contact">
+          <div class="footer__contact-item"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 014.27 11.9 19.79 19.79 0 011.21 3.3 2 2 0 013.2 1.11h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" stroke-linecap="round" stroke-linejoin="round"/></svg><a href="tel:+33685866890">+33 6 85 86 68 90</a></div>
+          <div class="footer__contact-item"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg><a href="mailto:blackvprestige@gmail.com">blackvprestige@gmail.com</a></div>
+          <div class="footer__contact-item"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14" stroke-linecap="round"/></svg><span>24h/24 — 7j/7</span></div>
+        </div>
+        <a href="reservation.html" class="btn btn-primary" style="margin-top:20px; font-size:0.68rem; padding:12px 24px;">Réserver</a>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span class="footer__copy">© 2024 Black V Prestige. Tous droits réservés.</span>
+      <div class="footer__legal">
+        <a href="mentions-legales.html">Mentions légales</a>
+        <a href="politique-confidentialite.html">Politique de confidentialité</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<button class="back-to-top" aria-label="Retour en haut"><svg viewBox="0 0 24 24"><path d="M18 15l-6-6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+<script src="assets/js/script.js"></script>
+<script src="assets/js/partner-form.js"></script>
+<script src="assets/js/translator.js"></script>
+</body>
+</html>
