@@ -20,7 +20,7 @@ const SURCHARGE_AERO = 10;     // +10 € si aéroport détecté
 
 // ↓↓↓ REMPLIR APRÈS CRÉATION DU COMPTE STRIPE ↓↓↓
 // Clé publique Stripe (pk_test_... ou pk_live_...)
-const STRIPE_PK = 'pk_test_51Ttse5D6PlGTZslBFZ2Vv7YMsS9hnjajwi3ohNNhfoKMUA3RECzzVhb2QUWZLBU3JvVIPA3UO3WEWoWU8LIzJO82008ThF7QTj';
+const STRIPE_PK = 'pk_live_51TuhjcHtLU03NFEB8BtKTTbpjxPqE4sbvR8PHGSLyQaNDQ9EGoOr0XzuXjwynC6hYdQBeMajIMHI8ZobZmD1n6VE00soW18LZf';
 // URL du backend déployé (fonction serverless Vercel)
 const BACKEND_URL = 'https://black-v-prestige.vercel.app/api/create-payment-intent';
 // ↑↑↑ ───────────────────────────────────────────────
