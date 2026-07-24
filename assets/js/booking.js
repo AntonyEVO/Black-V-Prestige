@@ -15,8 +15,6 @@
 
 // ── CONFIGURATION ──────────────────────────────────────────────────────────
 const TARIF_KM       = 3.00;   // € par kilomètre, identique de jour comme de nuit
-const TARIF_MIN      = 45;     // course minimum
-const SURCHARGE_AERO = 10;     // +10 € si aéroport détecté
 
 // ↓↓↓ REMPLIR APRÈS CRÉATION DU COMPTE STRIPE ↓↓↓
 // Clé publique Stripe (pk_test_... ou pk_live_...)
@@ -200,14 +198,8 @@ async function maybeRoute() {
 
 // ── CALCUL DU PRIX ─────────────────────────────────────────────────────────
 function calcPrice() {
-  const fromLow = (booking.from?.label || '').toLowerCase();
-  const toLow   = (booking.to?.label   || '').toLowerCase();
-  const AERO_WORDS = ['aéroport', 'aeroport', 'airport', 'côte d\'azur terminal'];
-  const airport = AERO_WORDS.some(k => fromLow.includes(k) || toLow.includes(k));
-
-  const base = Math.max(booking.distKm * TARIF_KM, TARIF_MIN);
-  const aSur = airport ? SURCHARGE_AERO : 0;
-  return { base, aSur, total: base + aSur, airport };
+  const base = booking.distKm * TARIF_KM;
+  return { base, total: base };
 }
 
 function renderCalc() {
@@ -220,9 +212,6 @@ function renderCalc() {
   document.getElementById('pr-meta').textContent   = `${booking.distKm.toFixed(1)} km — ${fmtDur(booking.durMin)}`;
   document.getElementById('pr-km').textContent     = `${booking.distKm.toFixed(1)} km`;
   document.getElementById('pr-km-val').textContent = fmtEur(booking.distKm * TARIF_KM);
-
-  const aeroRow = document.getElementById('pr-aero-row');
-  aeroRow.style.display = p.airport ? 'flex' : 'none';
 
   document.getElementById('pr-total').textContent = fmtEur(p.total);
   showCalc('result');
