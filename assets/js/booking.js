@@ -23,6 +23,8 @@ const SURCHARGE_AERO = 10;     // +10 € si aéroport détecté
 const STRIPE_PK = 'pk_live_51TuhjcHtLU03NFEB8BtKTTbpjxPqE4sbvR8PHGSLyQaNDQ9EGoOr0XzuXjwynC6hYdQBeMajIMHI8ZobZmD1n6VE00soW18LZf';
 // URL du backend déployé (fonction serverless Vercel)
 const BACKEND_URL = 'https://black-v-prestige.vercel.app/api/create-payment-intent';
+// URL de notification par email après paiement réussi
+const BOOKING_NOTIFY_URL = 'https://black-v-prestige.vercel.app/api/send-booking';
 // ↑↑↑ ───────────────────────────────────────────────
 
 // ── ÉTAT GLOBAL ────────────────────────────────────────────────────────────
@@ -465,6 +467,7 @@ document.getElementById('btn-pay').addEventListener('click', async () => {
     if (error) throw new Error(error.message);
     if (paymentIntent.status === 'succeeded') {
       showSuccess(false);
+      notifyBooking(paymentIntent.id);
     } else {
       throw new Error('Statut inattendu. Veuillez contacter Black V Prestige.');
     }
@@ -475,6 +478,35 @@ document.getElementById('btn-pay').addEventListener('click', async () => {
     btn.innerHTML = `<svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="1.5" fill="none" style="margin-right:6px"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg><span id="btn-pay-lbl">Payer ${fmtEur(booking.price)}</span>`;
   }
 });
+
+// Notifie par email (interne + client) après un paiement réussi.
+// Best-effort : un échec ici n'affecte jamais l'écran de succès déjà affiché.
+async function notifyBooking(paymentIntentId) {
+  try {
+    const serviceSelect = document.getElementById('res-service');
+    await fetch(BOOKING_NOTIFY_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        from:    booking.from?.label,
+        to:      booking.to?.label,
+        date:    booking.date,
+        time:    booking.time,
+        service: serviceSelect?.selectedOptions?.[0]?.textContent || booking.service,
+        pax:     booking.pax,
+        bags:    booking.bags,
+        price:   booking.price,
+        nom:     booking.nom,
+        prenom:  booking.prenom,
+        tel:     booking.tel,
+        email:   booking.email,
+        paymentIntentId
+      })
+    });
+  } catch (e) {
+    console.error('Notification réservation échouée (paiement déjà confirmé) :', e.message);
+  }
+}
 
 function showSuccess(isDemo) {
   const msg = isDemo
