@@ -511,7 +511,7 @@ async function notifyBooking(paymentIntentId) {
 function showSuccess(isDemo) {
   const msg = isDemo
     ? `[Mode démonstration] La simulation de réservation est confirmée. En production avec Stripe activé, un email de confirmation sera envoyé à ${booking.email}.`
-    : `Votre réservation est confirmée et le paiement de ${fmtEur(booking.price)} a bien été reçu. Un email de confirmation a été envoyé à ${booking.email}. Votre chauffeur sera là à l'heure.`;
+    : `Votre réservation est confirmée et le paiement de ${fmtEur(booking.price)} a bien été reçu. Notre équipe a été notifiée et reviendra vers vous rapidement pour les derniers détails. Votre chauffeur sera là à l'heure.`;
 
   document.getElementById('success-msg').textContent = msg;
   document.getElementById('sc-price').style.display = 'none';
