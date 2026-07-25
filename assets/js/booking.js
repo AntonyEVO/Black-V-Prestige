@@ -15,6 +15,7 @@
 
 // ── CONFIGURATION ──────────────────────────────────────────────────────────
 const TARIF_KM       = 3.00;   // € par kilomètre, identique de jour comme de nuit
+const TARIF_MIN      = 40;     // course minimum
 
 // ↓↓↓ REMPLIR APRÈS CRÉATION DU COMPTE STRIPE ↓↓↓
 // Clé publique Stripe (pk_test_... ou pk_live_...)
@@ -198,7 +199,7 @@ async function maybeRoute() {
 
 // ── CALCUL DU PRIX ─────────────────────────────────────────────────────────
 function calcPrice() {
-  const base = booking.distKm * TARIF_KM;
+  const base = Math.max(booking.distKm * TARIF_KM, TARIF_MIN);
   return { base, total: base };
 }
 
