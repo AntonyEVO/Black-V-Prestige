@@ -45,9 +45,17 @@
   // utilisé en complément pour les lieux hors BAN (aéroports, Monaco...).
   const BAN_MIN_SCORE = 0.55; // sous ce score, la BAN "invente" une correspondance peu fiable (ex: noms de lieux/aéroports)
 
-  async function searchBAN(q) {
+  // Biais de proximité ("itinéraire intelligent" façon Uber) : quand l'autre
+  // champ (départ ou arrivée) a déjà une adresse résolue, on fait remonter en
+  // priorité les résultats proches de ce point plutôt que des adresses
+  // homonymes n'importe où en France/dans le monde.
+  const BIAS_VIEWBOX_DELTA = 0.35; // ~35 km autour du point de biais
+
+  async function searchBAN(q, bias) {
     try {
-      const r = await fetch(`https://api-adresse.data.gouv.fr/search/?q=${encodeURIComponent(q)}&limit=5`);
+      let url = `https://api-adresse.data.gouv.fr/search/?q=${encodeURIComponent(q)}&limit=5`;
+      if (bias) url += `&lat=${bias.lat}&lon=${bias.lon}`;
+      const r = await fetch(url);
       const data = await r.json();
       return (data.features || [])
         .filter(f => (f.properties.score || 0) >= BAN_MIN_SCORE)
@@ -60,12 +68,14 @@
     } catch { return []; }
   }
 
-  async function searchNominatim(q) {
+  async function searchNominatim(q, bias) {
     try {
-      const r = await fetch(
-        `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(q)}&format=json&limit=4&accept-language=fr`,
-        { headers: { 'Accept-Language': 'fr' } }
-      );
+      let url = `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(q)}&format=json&limit=4&accept-language=fr`;
+      if (bias) {
+        const d = BIAS_VIEWBOX_DELTA;
+        url += `&viewbox=${bias.lon - d},${bias.lat + d},${bias.lon + d},${bias.lat - d}`;
+      }
+      const r = await fetch(url, { headers: { 'Accept-Language': 'fr' } });
       const raw = await r.json();
       return raw.map(p => {
         const parts = p.display_name.split(', ');
@@ -79,9 +89,9 @@
     } catch { return []; }
   }
 
-  async function searchAddresses(q) {
+  async function searchAddresses(q, bias) {
     if (q.length < 3) return [];
-    const [ban, nom] = await Promise.all([searchBAN(q), searchNominatim(q)]);
+    const [ban, nom] = await Promise.all([searchBAN(q, bias), searchNominatim(q, bias)]);
     const merged = [...ban];
     nom.forEach(np => {
       const dup = merged.some(bp => bp.name.toLowerCase() === np.name.toLowerCase());
@@ -90,14 +100,15 @@
     return merged.slice(0, 6);
   }
 
-  function setupAC(inputId, listId, stateKey) {
+  function setupAC(inputId, listId, stateKey, biasKey) {
     const inp  = document.getElementById(inputId);
     const list = document.getElementById(listId);
     if (!inp || !list) return;
     let places = [], focused = -1;
 
     const search = debounce(async (v) => {
-      places  = await searchAddresses(v);
+      const bias = biasKey && hero[biasKey] ? { lat: hero[biasKey].lat, lon: hero[biasKey].lon } : null;
+      places  = await searchAddresses(v, bias);
       focused = -1;
       renderList();
     }, 380);
@@ -197,6 +208,6 @@
     window.location.href = `reservation.html?${params.toString()}`;
   });
 
-  setupAC('hero-depart',  'hero-list-depart',  'from');
-  setupAC('hero-arrivee', 'hero-list-arrivee', 'to');
+  setupAC('hero-depart',  'hero-list-depart',  'from', 'to');
+  setupAC('hero-arrivee', 'hero-list-arrivee', 'to',   'from');
 })();
