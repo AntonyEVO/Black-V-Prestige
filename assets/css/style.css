@@ -794,7 +794,7 @@ input, textarea, select { font-family: var(--font-sans); font-size: 14px; outlin
   position: absolute;
   left: 0; top: 0; bottom: 0;
   width: 2px;
-  background: var(--champagne);
+  background: var(--silver);
   transform: scaleY(0);
   transform-origin: top;
   transition: transform var(--t-mid);
@@ -804,7 +804,7 @@ input, textarea, select { font-family: var(--font-sans); font-size: 14px; outlin
 .partner-benefit__num {
   font-family: var(--font-serif);
   font-size: 1.15rem;
-  color: var(--champagne);
+  color: var(--silver);
   letter-spacing: 0.03em;
   flex-shrink: 0;
   min-width: 32px;
