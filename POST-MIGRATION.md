@@ -33,6 +33,13 @@
 - [ ] Ajouter des photos réelles de la flotte dès qu'elles remplacent les images Unsplash (voir `IMAGES-A-REMPLACER.md`).
 - [ ] Encourager les premiers avis clients réels — une fois obtenus et vérifiables, on pourra alors ajouter un `aggregateRating` dans le schema JSON-LD `LocalBusiness` (volontairement omis pour l'instant, faute d'avis réels).
 
+## 5bis. Sécurité — limitation de débit (rate limiting)
+
+Un audit de sécurité (2026-07-26) a permis de corriger deux failles critiques : la manipulation du prix payé et le contournement du contrôle CORS (voir historique Git pour le détail). Un point reste en suspens, volontairement non implémenté dans le code car il nécessiterait une nouvelle dépendance (base de données/cache externe type Redis) :
+
+- [ ] **Activer une protection anti-abus sur le projet Vercel** : dans le tableau de bord Vercel du projet `black-v-prestige`, section **Firewall** (ou **Attack Challenge Mode**), activer une limite de requêtes par IP sur les routes `/api/*`. Sans base de données externe (Vercel KV, Upstash Redis...), un rate limiting fiable ne peut pas être codé directement dans les fonctions serverless (elles ne partagent pas d'état entre elles). L'option Vercel Firewall est la solution la plus simple sans changement de code — vérifier si elle est disponible sur le plan actuel (peut nécessiter un plan payant).
+- [ ] Si le trafic d'abus devient un problème réel malgré ça, envisager d'ajouter un CAPTCHA (Cloudflare Turnstile, gratuit) sur les formulaires contact/apporteur d'affaires.
+
 ## 5. Vérifications générales
 
 - [ ] Contrôler qu'aucun lien interne ne pointe encore vers l'ancien domaine ou vers `vercel.app`.
