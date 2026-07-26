@@ -1,0 +1,21 @@
+# ================================================================
+#  BLACK V PRESTIGE — Configuration Apache (Hostinger)
+#  Domaine final : https://www.blackvprestige.com
+# ================================================================
+
+RewriteEngine On
+
+# ── 1. Forcer HTTPS ─────────────────────────────────────────────
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+
+# ── 2. Forcer le www (forme canonique choisie : www.blackvprestige.com) ──
+RewriteCond %{HTTP_HOST} !^www\. [NC]
+RewriteRule ^(.*)$ https://www.%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+
+# ── 3. Extension .html conservée visible ───────────────────────
+# Cohérent avec le sitemap.xml et les balises canonical du site
+# (aucune règle de réécriture nécessaire ici).
+
+# ── 4. Page d'erreur 404 personnalisée (à activer si le fichier existe) ──
+# ErrorDocument 404 /404.html
