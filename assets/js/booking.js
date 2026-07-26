@@ -232,33 +232,58 @@ async function maybeRoute() {
 }
 
 // ── CALCUL DU PRIX ─────────────────────────────────────────────────────────
+// La mise à disposition (demi-journée / journée) est un service sur devis :
+// elle dépend de la durée, du programme et des prestations demandées, pas
+// d'une distance point à point — aucun prix automatique n'est calculé.
+function isDevisService() {
+  const v = document.getElementById('res-service')?.value;
+  return v === 'dispo-demi' || v === 'dispo-jour';
+}
+
 function calcPrice() {
   const base = Math.max(booking.distKm * TARIF_KM, TARIF_MIN);
   return { base, total: base };
 }
 
 function renderCalc() {
-  const p = calcPrice();
-  booking.price = p.total;
+  const devis = isDevisService();
 
-  // Affichage dans le calculateur
-  document.getElementById('pr-from').textContent   = booking.from.label;
-  document.getElementById('pr-to').textContent     = booking.to.label;
-  document.getElementById('pr-meta').textContent   = `${booking.distKm.toFixed(1)} km — ${fmtDur(booking.durMin)}`;
-  document.getElementById('pr-km').textContent     = `${booking.distKm.toFixed(1)} km`;
-  document.getElementById('pr-km-val').textContent = fmtEur(booking.distKm * TARIF_KM);
+  // Affichage dans le calculateur (commun aux deux modes)
+  document.getElementById('pr-from').textContent = booking.from.label;
+  document.getElementById('pr-to').textContent   = booking.to.label;
+  document.getElementById('pr-meta').textContent = `${booking.distKm.toFixed(1)} km — ${fmtDur(booking.durMin)}`;
 
-  document.getElementById('pr-total').textContent = fmtEur(p.total);
+  document.getElementById('pc-breakdown-normal').style.display = devis ? 'none' : '';
+  document.getElementById('pc-note-normal').style.display      = devis ? 'none' : '';
+  document.getElementById('pc-breakdown-devis').style.display  = devis ? '' : 'none';
+  document.getElementById('pc-note-devis').style.display       = devis ? '' : 'none';
+
+  if (devis) {
+    booking.price = null;
+  } else {
+    const p = calcPrice();
+    booking.price = p.total;
+    document.getElementById('pr-km').textContent     = `${booking.distKm.toFixed(1)} km`;
+    document.getElementById('pr-km-val').textContent = fmtEur(booking.distKm * TARIF_KM);
+    document.getElementById('pr-total').textContent  = fmtEur(p.total);
+  }
   showCalc('result');
 
   // Mise à jour de la sidebar
   const sc = document.getElementById('sc-price');
   sc.style.display = 'block';
-  document.getElementById('sc-val').textContent  = fmtEur(p.total);
+  document.getElementById('sc-val').textContent  = devis ? 'Sur devis' : fmtEur(booking.price);
   document.getElementById('sc-meta').textContent = `${booking.distKm.toFixed(1)} km — ${fmtDur(booking.durMin)}`;
+  const scNote = document.getElementById('sc-note');
+  if (scNote) scNote.style.display = devis ? 'none' : '';
 
   refreshBtn1();
 }
+
+document.getElementById('res-service').addEventListener('change', () => {
+  if (booking.from && booking.to && booking.distKm != null) renderCalc();
+  else refreshBtn1();
+});
 
 function showCalc(mode) {
   const box     = document.getElementById('price-calc');
@@ -281,7 +306,7 @@ document.getElementById('res-date').addEventListener('change', e => {
 
 // ── NAVIGATION PAR ÉTAPES ──────────────────────────────────────────────────
 function refreshBtn1() {
-  const ok = booking.from && booking.to && booking.price !== null
+  const ok = booking.from && booking.to && (isDevisService() || booking.price !== null)
     && document.getElementById('res-date').value
     && document.getElementById('res-heure').value;
   document.getElementById('btn1-next').disabled = !ok;
@@ -307,8 +332,15 @@ function goStep(n) {
   const layout = document.querySelector('.booking-layout');
   if (layout) layout.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
-  // Initialiser Stripe au passage à l'étape 3
-  if (n === 3 && !stripeReady) mountStripe();
+  // Étape 3 : bloc paiement Stripe, ou bloc "sur devis" pour la mise à disposition
+  if (n === 3) {
+    const devis = isDevisService();
+    const normalBlock = document.getElementById('pay-normal-block');
+    const devisBlock  = document.getElementById('pay-devis-block');
+    if (normalBlock) normalBlock.style.display = devis ? 'none' : '';
+    if (devisBlock)  devisBlock.style.display  = devis ? '' : 'none';
+    if (!devis && !stripeReady) mountStripe();
+  }
 }
 
 // Étape 1 → 2
@@ -364,8 +396,14 @@ function fillRecap() {
   });
   document.getElementById('rc-date').textContent = `${dateStr} à ${booking.time}`;
   document.getElementById('rc-pax').textContent  = `${booking.pax} passager${booking.pax > 1 ? 's' : ''} — ${booking.prenom} ${booking.nom}`;
-  document.getElementById('rc-total').textContent = fmtEur(booking.price);
-  document.getElementById('btn-pay-lbl').textContent = `Payer ${fmtEur(booking.price)}`;
+
+  if (isDevisService()) {
+    document.getElementById('rc-total').textContent    = 'Sur devis';
+    document.getElementById('btn-pay-lbl').textContent = 'Envoyer ma demande de devis';
+  } else {
+    document.getElementById('rc-total').textContent    = fmtEur(booking.price);
+    document.getElementById('btn-pay-lbl').textContent = `Payer ${fmtEur(booking.price)}`;
+  }
 }
 
 // ── STRIPE ELEMENTS ────────────────────────────────────────────────────────
@@ -444,8 +482,49 @@ function mountStripe() {
   }
 }
 
+// ── DEMANDE DE DEVIS (mise à disposition) ───────────────────────────────────
+async function submitDevis() {
+  const btn   = document.getElementById('btn-pay');
+  const errEl = document.getElementById('pay-error');
+  errEl.classList.remove('show');
+  btn.disabled = true;
+  btn.innerHTML = '<span class="bvp-spinner"></span>&nbsp; Envoi en cours…';
+
+  const serviceLabel = document.getElementById('res-service')?.selectedOptions?.[0]?.textContent || 'Mise à disposition';
+  const message = [
+    `Demande de devis — ${serviceLabel}`,
+    `Départ : ${booking.from.label}`,
+    `Destination / zone : ${booking.to.label}`,
+    `Date souhaitée : ${booking.date} à ${booking.time}`,
+    `Passagers : ${booking.pax} — Bagages : ${booking.bags}`,
+    booking.message ? `Précisions du client : ${booking.message}` : ''
+  ].filter(Boolean).join('\n');
+
+  try {
+    const res = await fetch('https://black-v-prestige.vercel.app/api/send-contact', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        nom: booking.nom, prenom: booking.prenom, tel: booking.tel, email: booking.email,
+        sujet: `Demande de devis — ${serviceLabel}`,
+        message
+      })
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || 'Une erreur est survenue.');
+    showDevisSuccess(serviceLabel);
+  } catch (e) {
+    errEl.textContent = e.message;
+    errEl.classList.add('show');
+    btn.disabled = false;
+    btn.innerHTML = `<span id="btn-pay-lbl">Envoyer ma demande de devis</span>`;
+  }
+}
+
 // ── PAIEMENT ───────────────────────────────────────────────────────────────
 document.getElementById('btn-pay').addEventListener('click', async () => {
+  if (isDevisService()) { await submitDevis(); return; }
+
   const btn   = document.getElementById('btn-pay');
   const errEl = document.getElementById('pay-error');
   errEl.classList.remove('show');
@@ -532,11 +611,7 @@ async function notifyBooking(paymentIntentId) {
   }
 }
 
-function showSuccess(isDemo) {
-  const msg = isDemo
-    ? `[Mode démonstration] La simulation de réservation est confirmée. En production avec Stripe activé, un email de confirmation sera envoyé à ${booking.email}.`
-    : `Votre réservation est confirmée et le paiement de ${fmtEur(booking.price)} a bien été reçu. Notre équipe a été notifiée et reviendra vers vous rapidement pour les derniers détails. Votre chauffeur sera là à l'heure.`;
-
+function finalizeSuccess(msg) {
   document.getElementById('success-msg').textContent = msg;
   document.getElementById('sc-price').style.display = 'none';
 
@@ -552,6 +627,17 @@ function showSuccess(isDemo) {
 
   document.querySelectorAll('.booking-panel').forEach(el => el.classList.remove('active'));
   document.getElementById('panel-success').classList.add('active');
+}
+
+function showSuccess(isDemo) {
+  const msg = isDemo
+    ? `[Mode démonstration] La simulation de réservation est confirmée. En production avec Stripe activé, un email de confirmation sera envoyé à ${booking.email}.`
+    : `Votre réservation est confirmée et le paiement de ${fmtEur(booking.price)} a bien été reçu. Notre équipe a été notifiée et reviendra vers vous rapidement pour les derniers détails. Votre chauffeur sera là à l'heure.`;
+  finalizeSuccess(msg);
+}
+
+function showDevisSuccess(serviceLabel) {
+  finalizeSuccess(`Votre demande de devis pour "${serviceLabel}" a bien été transmise. Notre équipe vous recontactera sous 24h au ${booking.tel} ou par email pour vous proposer un tarif personnalisé.`);
 }
 
 // ── INITIALISATION ─────────────────────────────────────────────────────────

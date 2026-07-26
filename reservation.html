@@ -156,7 +156,7 @@
                   </div>
                 </div>
 
-                <div class="price-breakdown">
+                <div id="pc-breakdown-normal" class="price-breakdown">
                   <div class="price-line">
                     <span id="pr-km">Distance</span>
                     <span id="pr-km-val">—</span>
@@ -170,8 +170,15 @@
                     <span id="pr-total">—</span>
                   </div>
                 </div>
+                <p id="pc-note-normal" class="price-note">Tarif indicatif calculé sur la distance routière. Minimum de course : 40 €. Prix confirmé avant tout paiement.</p>
 
-                <p class="price-note">Tarif indicatif calculé sur la distance routière. Minimum de course : 40 €. Prix confirmé avant tout paiement.</p>
+                <div id="pc-breakdown-devis" class="price-breakdown" style="display:none;">
+                  <div class="price-line price-line--total">
+                    <span>Tarif</span>
+                    <span>Sur devis</span>
+                  </div>
+                </div>
+                <p id="pc-note-devis" class="price-note" style="display:none;">La mise à disposition est facturée sur devis personnalisé, selon la durée et le programme souhaités. Notre équipe vous recontactera sous 24h avec un tarif adapté.</p>
               </div>
             </div>
             <!-- fin calculateur -->
@@ -320,21 +327,34 @@
             </div>
 
             <!-- Carte bancaire (Stripe Elements) -->
-            <div class="form-group">
-              <label class="form-label">Informations de carte bancaire</label>
-              <div id="stripe-wrap" class="stripe-wrap">
-                <div id="stripe-card"></div>
+            <div id="pay-normal-block">
+              <div class="form-group">
+                <label class="form-label">Informations de carte bancaire</label>
+                <div id="stripe-wrap" class="stripe-wrap">
+                  <div id="stripe-card"></div>
+                </div>
               </div>
-              <div class="pay-error" id="pay-error"></div>
+
+              <!-- Badge sécurité -->
+              <div class="secure-badge">
+                <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="1.5" fill="none">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                </svg>
+                <span>Paiement 100 % sécurisé — chiffrement SSL — Stripe ne stocke jamais vos données de carte sur nos serveurs. Black V Prestige ne voit jamais votre numéro de carte.</span>
+              </div>
             </div>
 
-            <!-- Badge sécurité -->
-            <div class="secure-badge">
-              <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="1.5" fill="none">
-                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-              </svg>
-              <span>Paiement 100 % sécurisé — chiffrement SSL — Stripe ne stocke jamais vos données de carte sur nos serveurs. Black V Prestige ne voit jamais votre numéro de carte.</span>
+            <!-- Bloc "sur devis" (mise à disposition) -->
+            <div id="pay-devis-block" style="display:none;">
+              <div class="secure-badge">
+                <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="1.5" fill="none">
+                  <circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/>
+                </svg>
+                <span>Cette prestation est facturée sur devis personnalisé. Aucun paiement n'est demandé maintenant : envoyez votre demande, notre équipe vous recontacte sous 24h avec un tarif adapté à vos besoins.</span>
+              </div>
             </div>
+
+            <div class="pay-error" id="pay-error"></div>
 
             <div style="display:flex; justify-content:space-between; margin-top:8px; gap:12px; flex-wrap:wrap;">
               <button type="button" class="btn btn-secondary" id="btn3-back">
@@ -385,7 +405,7 @@
           <span class="sidebar-price-val" id="sc-val">—</span>
           <span class="sidebar-price-meta" id="sc-meta"></span>
           <div style="height:1px; background:var(--border-light); margin:16px 0;"></div>
-          <p style="font-size:0.78rem; color:var(--text-muted); line-height:1.6;">Tarif à 3,00 € / km · minimum 40 €</p>
+          <p id="sc-note" style="font-size:0.78rem; color:var(--text-muted); line-height:1.6;">Tarif à 3,00 € / km · minimum 40 €</p>
         </div>
 
         <!-- Contact direct -->
