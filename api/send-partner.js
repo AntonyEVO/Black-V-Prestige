@@ -26,9 +26,12 @@ function esc(s) {
     .replace(/>/g, '&gt;');
 }
 
+const CSV_MAX_BYTES = 2 * 1024 * 1024; // 2 Mo décodés
+
 module.exports = async (req, res) => {
   const origin = req.headers.origin;
-  if (ALLOWED_ORIGINS.includes(origin)) {
+  const originAllowed = ALLOWED_ORIGINS.includes(origin);
+  if (originAllowed) {
     res.setHeader('Access-Control-Allow-Origin', origin);
   }
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
@@ -41,6 +44,12 @@ module.exports = async (req, res) => {
 
   if (req.method !== 'POST') {
     res.status(405).json({ error: 'Méthode non autorisée.' });
+    return;
+  }
+
+  // Défense en profondeur contre les appels directs hors navigateur (spam automatisé).
+  if (!originAllowed) {
+    res.status(403).json({ error: 'Origine non autorisée.' });
     return;
   }
 
@@ -58,6 +67,22 @@ module.exports = async (req, res) => {
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       res.status(400).json({ error: 'Adresse email invalide.' });
       return;
+    }
+
+    // Validation de la pièce jointe CSV : type, nom de fichier et taille.
+    let safeCsvName = null, safeCsvContent = null;
+    if (csvContent && csvName) {
+      if (!/^[\w\-. ]{1,100}\.csv$/i.test(csvName)) {
+        res.status(400).json({ error: 'Le fichier joint doit être un .csv (nom de fichier invalide).' });
+        return;
+      }
+      const decodedSize = Math.ceil(csvContent.length * 3 / 4);
+      if (decodedSize > CSV_MAX_BYTES) {
+        res.status(400).json({ error: 'Le fichier joint dépasse la taille maximale autorisée (2 Mo).' });
+        return;
+      }
+      safeCsvName = csvName;
+      safeCsvContent = csvContent;
     }
 
     const html = `
@@ -81,8 +106,8 @@ module.exports = async (req, res) => {
       html
     };
 
-    if (csvContent && csvName) {
-      payload.attachments = [{ filename: csvName, content: csvContent }];
+    if (safeCsvContent && safeCsvName) {
+      payload.attachments = [{ filename: safeCsvName, content: safeCsvContent }];
     }
 
     const resendRes = await fetch('https://api.resend.com/emails', {

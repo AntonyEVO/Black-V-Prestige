@@ -541,19 +541,22 @@ document.getElementById('btn-pay').addEventListener('click', async () => {
 
   // ─── MODE PRODUCTION ──────────────────────────────────────────────────
   try {
-    // 1. Créer un PaymentIntent côté serveur
+    // 1. Créer un PaymentIntent côté serveur — le prix est recalculé et
+    //    vérifié côté serveur à partir des coordonnées (voir api/create-payment-intent.js),
+    //    jamais pris tel quel depuis le client.
     const res = await fetch(BACKEND_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        amount:      Math.round(booking.price * 100), // en centimes
-        currency:    'eur',
+        from:        { lat: booking.from.lat, lon: booking.from.lon },
+        to:          { lat: booking.to.lat,   lon: booking.to.lon   },
         description: `Black V Prestige — ${booking.from.label} → ${booking.to.label}`,
         customer:    { nom: booking.nom, prenom: booking.prenom, email: booking.email, tel: booking.tel }
       })
     });
-    const { clientSecret, error: backendErr } = await res.json();
+    const { clientSecret, amount, error: backendErr } = await res.json();
     if (backendErr) throw new Error(backendErr);
+    if (typeof amount === 'number') booking.price = amount / 100; // aligne l'affichage sur le prix réellement facturé
 
     // 2. Confirmer le paiement côté Stripe
     const { error, paymentIntent } = await stripe.confirmCardPayment(clientSecret, {

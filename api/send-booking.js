@@ -49,7 +49,8 @@ async function sendEmail(payload) {
 
 module.exports = async (req, res) => {
   const origin = req.headers.origin;
-  if (ALLOWED_ORIGINS.includes(origin)) {
+  const originAllowed = ALLOWED_ORIGINS.includes(origin);
+  if (originAllowed) {
     res.setHeader('Access-Control-Allow-Origin', origin);
   }
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
@@ -62,6 +63,12 @@ module.exports = async (req, res) => {
 
   if (req.method !== 'POST') {
     res.status(405).json({ error: 'Méthode non autorisée.' });
+    return;
+  }
+
+  // Défense en profondeur contre les appels directs hors navigateur (spam automatisé).
+  if (!originAllowed) {
+    res.status(403).json({ error: 'Origine non autorisée.' });
     return;
   }
 
