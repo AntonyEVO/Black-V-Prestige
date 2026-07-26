@@ -49,11 +49,29 @@
   // champ (départ ou arrivée) a déjà une adresse résolue, on fait remonter en
   // priorité les résultats proches de ce point plutôt que des adresses
   // homonymes n'importe où en France/dans le monde.
+  //
+  // Le paramètre lat/lon de la BAN et le viewbox de Nominatim influencent bien
+  // leur classement interne, mais trop faiblement pour des requêtes génériques
+  // très fréquentes ("gare", "mairie"...) : testé en conditions réelles, une
+  // recherche "gare" depuis Vieux-Condé (Nord) continuait de renvoyer des gares
+  // de Saint-Nazaire ou d'Étaples avant celles du Nord. Le tri fiable se fait
+  // donc côté client, par distance réelle (haversine), sur un pool de candidats
+  // plus large — les deux APIs ne servent qu'à fournir ce pool.
   const BIAS_VIEWBOX_DELTA = 0.35; // ~35 km autour du point de biais
+
+  function haversineKm(lat1, lon1, lat2, lon2) {
+    const R = 6371;
+    const dLat = (lat2 - lat1) * Math.PI / 180;
+    const dLon = (lon2 - lon1) * Math.PI / 180;
+    const a = Math.sin(dLat / 2) ** 2 +
+              Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * Math.sin(dLon / 2) ** 2;
+    return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  }
 
   async function searchBAN(q, bias) {
     try {
-      let url = `https://api-adresse.data.gouv.fr/search/?q=${encodeURIComponent(q)}&limit=5`;
+      const limit = bias ? 15 : 5;
+      let url = `https://api-adresse.data.gouv.fr/search/?q=${encodeURIComponent(q)}&limit=${limit}`;
       if (bias) url += `&lat=${bias.lat}&lon=${bias.lon}`;
       const r = await fetch(url);
       const data = await r.json();
@@ -70,7 +88,8 @@
 
   async function searchNominatim(q, bias) {
     try {
-      let url = `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(q)}&format=json&limit=4&accept-language=fr`;
+      const limit = bias ? 10 : 4;
+      let url = `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(q)}&format=json&limit=${limit}&accept-language=fr`;
       if (bias) {
         const d = BIAS_VIEWBOX_DELTA;
         url += `&viewbox=${bias.lon - d},${bias.lat + d},${bias.lon + d},${bias.lat - d}`;
@@ -97,6 +116,10 @@
       const dup = merged.some(bp => bp.name.toLowerCase() === np.name.toLowerCase());
       if (!dup) merged.push(np);
     });
+    if (bias) {
+      merged.forEach(p => { p.dist = haversineKm(bias.lat, bias.lon, p.lat, p.lon); });
+      merged.sort((a, b) => a.dist - b.dist);
+    }
     return merged.slice(0, 6);
   }
 
