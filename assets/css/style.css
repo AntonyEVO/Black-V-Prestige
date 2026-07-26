@@ -770,12 +770,57 @@ input, textarea, select { font-family: var(--font-sans); font-size: 14px; outlin
 .partner-card__title { font-family: var(--font-serif); font-size: 1.2rem; font-weight: 500; color: var(--text-primary); }
 .partner-card__text  { font-size: 0.84rem; line-height: 1.75; color: var(--text-secondary); flex: 1; }
 
-.partner-benefits { display: grid; grid-template-columns: repeat(2,1fr); gap: 1px; background: var(--border-light); border: 1px solid var(--border-light); border-radius: var(--radius-md); overflow: hidden; }
-.partner-benefit { background: var(--white); padding: 28px 24px; display: flex; gap: 14px; align-items: flex-start; transition: background var(--t-mid); }
-.partner-benefit:hover { background: var(--warm); }
-.partner-benefit__check { width: 18px; height: 18px; border: 1px solid var(--border-medium); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; }
-.partner-benefit__check::after { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--text-muted); }
-.partner-benefit__text { font-size: 0.84rem; line-height: 1.65; color: var(--text-secondary); }
+.partner-benefits {
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  gap: 1px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+.partner-benefit {
+  position: relative;
+  background: var(--black-carbon);
+  padding: 38px 40px;
+  display: flex;
+  gap: 22px;
+  align-items: flex-start;
+  overflow: hidden;
+  transition: background var(--t-mid);
+}
+.partner-benefit::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 2px;
+  background: var(--champagne);
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform var(--t-mid);
+}
+.partner-benefit:hover { background: var(--black-lux); }
+.partner-benefit:hover::before { transform: scaleY(1); }
+.partner-benefit__num {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  color: var(--champagne);
+  letter-spacing: 0.03em;
+  flex-shrink: 0;
+  min-width: 32px;
+  opacity: 0.8;
+  transition: opacity var(--t-mid);
+}
+.partner-benefit:hover .partner-benefit__num { opacity: 1; }
+.partner-benefit__title {
+  font-family: var(--font-serif);
+  font-size: 1.05rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  color: var(--white);
+  margin-bottom: 8px;
+}
+.partner-benefit__text { font-size: 0.85rem; line-height: 1.7; color: var(--text-dark-sec); }
 
 /* ============================================================
    VALUE CARDS (about)
@@ -974,6 +1019,7 @@ input, textarea, select { font-family: var(--font-sans); font-size: 14px; outlin
   .footer__bottom { flex-direction: column; align-items: center; text-align: center; }
   .partners-grid { grid-template-columns: 1fr; }
   .partner-benefits { grid-template-columns: 1fr; }
+  .partner-benefit { padding: 30px 26px; gap: 16px; }
   .about-values { grid-template-columns: 1fr; }
   .form-row { grid-template-columns: 1fr; }
   .page-hero { padding: 130px 0 56px; }
