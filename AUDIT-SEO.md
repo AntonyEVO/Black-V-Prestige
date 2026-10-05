@@ -118,7 +118,7 @@ Détail complet (page, emplacement, suggestion) à produire dans `IMAGES-A-REMPL
 
 ## 9. Crédibilité / cohérence
 
-- **Email** : `blackvprestige@gmail.com` utilisé partout (header, footer, contact, JSON-LD futur) — à remplacer par une adresse pro une fois créée sur Hostinger.
+- **Email** : `montclairprestige@gmail.com` utilisé partout (header, footer, contact, JSON-LD futur) — à remplacer par une adresse pro une fois créée sur Hostinger.
 - **Réseaux sociaux** : les 3 icônes du footer (Instagram, LinkedIn, Facebook) ont toutes `href="#"` — aucun vrai lien, présent identiquement sur les 11 pages (même bloc de footer dupliqué).
 - **Copyright** : `© 2024 Montclair Prestige` sur les 11 pages — année à mettre à jour.
 - **Mentions légales** : le fichier contient déjà, en placeholders explicites : `[Numéro SIRET à compléter]` et `[Nom de l'hébergeur — à compléter]` — informations jamais renseignées, à fournir.

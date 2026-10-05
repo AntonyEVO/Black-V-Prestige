@@ -7,7 +7,7 @@
 //  le formulaire de contact) : RESEND_API_KEY.
 // ================================================================
 
-const DEST_EMAIL = 'blackvprestige@gmail.com';
+const DEST_EMAIL = 'montclairprestige@gmail.com';
 
 const ALLOWED_ORIGINS = [
   'http://localhost:3000',

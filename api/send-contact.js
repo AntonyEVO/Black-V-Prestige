@@ -9,7 +9,7 @@
 //    RESEND_API_KEY = re_...
 // ================================================================
 
-const DEST_EMAIL = 'blackvprestige@gmail.com';
+const DEST_EMAIL = 'montclairprestige@gmail.com';
 
 const ALLOWED_ORIGINS = [
   'http://localhost:3000',

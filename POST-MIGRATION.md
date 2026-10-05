@@ -15,7 +15,7 @@
 ## 2. Email professionnel
 
 - [ ] Créer l'adresse `contact@montclairprestige.com` dans le panneau Hostinger (webmail ou redirection vers une autre boîte).
-- [ ] Une fois créée, remplacer `blackvprestige@gmail.com` par cette adresse dans tout le code (header, footer, contact, JSON-LD) — voir le reste du chantier SEO, Phase 5.
+- [ ] Une fois créée, remplacer `montclairprestige@gmail.com` par cette adresse dans tout le code (header, footer, contact, JSON-LD) — voir le reste du chantier SEO, Phase 5.
 
 ## 3. Google Search Console
 

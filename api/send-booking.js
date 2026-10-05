@@ -4,12 +4,12 @@
 // ================================================================
 //  Appelée après un paiement Stripe réussi (reservation.html).
 //  Envoie deux emails via Resend :
-//    1. Notification interne à blackvprestige@gmail.com (détails course)
+//    1. Notification interne à montclairprestige@gmail.com (détails course)
 //    2. Confirmation au client
 //  Variable d'environnement requise (déjà configurée) : RESEND_API_KEY.
 // ================================================================
 
-const DEST_EMAIL = 'blackvprestige@gmail.com';
+const DEST_EMAIL = 'montclairprestige@gmail.com';
 
 const ALLOWED_ORIGINS = [
   'http://localhost:3000',
@@ -107,7 +107,7 @@ module.exports = async (req, res) => {
       <p>Bonjour ${esc(prenom)},</p>
       <p>Nous avons bien reçu votre paiement. Voici le récapitulatif de votre course :</p>
       ${detailsHtml}
-      <p>Votre chauffeur sera à l'heure. Pour toute question, contactez-nous au +33 6 85 86 68 90 ou à blackvprestige@gmail.com.</p>
+      <p>Votre chauffeur sera à l'heure. Pour toute question, contactez-nous au +33 7 61 54 43 77 ou à montclairprestige@gmail.com.</p>
       <p>Merci de votre confiance,<br>L'équipe Montclair Prestige</p>
     `;
 
