@@ -99,7 +99,7 @@ module.exports = async (req, res) => {
     `;
 
     const payload = {
-      from: 'Montclair Prestige <onboarding@resend.dev>',
+      from: 'Montclair Prestige <reservation@montclairprestige.com>',
       to: [DEST_EMAIL],
       reply_to: email,
       subject: `Nouvel apporteur d'affaires — ${prenom} ${nom}`,

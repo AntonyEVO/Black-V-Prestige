@@ -82,7 +82,7 @@ module.exports = async (req, res) => {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        from: 'Montclair Prestige <onboarding@resend.dev>',
+        from: 'Montclair Prestige <reservation@montclairprestige.com>',
         to: [DEST_EMAIL],
         reply_to: email,
         subject: `Nouveau message — ${sujet || 'Site Montclair Prestige'}`,

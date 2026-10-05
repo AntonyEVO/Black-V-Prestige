@@ -113,14 +113,14 @@ module.exports = async (req, res) => {
 
     const results = await Promise.allSettled([
       sendEmail({
-        from: 'Montclair Prestige <onboarding@resend.dev>',
+        from: 'Montclair Prestige <reservation@montclairprestige.com>',
         to: [DEST_EMAIL],
         reply_to: email,
         subject: `Nouvelle réservation payée — ${prenom} ${nom}`,
         html: internalHtml
       }),
       sendEmail({
-        from: 'Montclair Prestige <onboarding@resend.dev>',
+        from: 'Montclair Prestige <reservation@montclairprestige.com>',
         to: [email],
         reply_to: DEST_EMAIL,
         subject: 'Votre réservation Montclair Prestige est confirmée',
