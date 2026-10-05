@@ -1,5 +1,5 @@
 /* ================================================================
-   BLACK V PRESTIGE — FORMULAIRE "APPORTEUR D'AFFAIRES"
+   MONTCLAIR PRESTIGE — FORMULAIRE "APPORTEUR D'AFFAIRES"
    Formulaire en 2 étapes : demande (étape 1) puis coordonnées
    (étape 2). Envoie vers api/send-partner.js (Vercel + Resend),
    avec pièce jointe CSV optionnelle encodée en base64.

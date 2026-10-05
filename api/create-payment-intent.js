@@ -1,5 +1,5 @@
 // ================================================================
-//  BLACK V PRESTIGE — FONCTION SERVERLESS VERCEL (PAIEMENT STRIPE)
+//  MONTCLAIR PRESTIGE — FONCTION SERVERLESS VERCEL (PAIEMENT STRIPE)
 // ================================================================
 //  Déploiement : Vercel (aucune configuration nécessaire, ce fichier
 //  devient automatiquement l'endpoint /api/create-payment-intent).
@@ -25,8 +25,8 @@ const ALLOWED_ORIGINS = [
   'http://127.0.0.1:5500',
   'http://127.0.0.1:8080',
   'https://antonyevo.github.io',
-  'https://www.blackvprestige.com',
-  'https://blackvprestige.com'
+  'https://www.montclairprestige.com',
+  'https://montclairprestige.com'
 ];
 
 const TARIF_KM       = 3.00;   // € par kilomètre — doit rester identique à assets/js/booking.js
@@ -99,7 +99,7 @@ module.exports = async (req, res) => {
     const intent = await stripe.paymentIntents.create({
       amount,
       currency: 'eur', // devise fixe, jamais prise depuis le client
-      description:   description || 'Black V Prestige — Course privée',
+      description:   description || 'Montclair Prestige — Course privée',
       receipt_email: customer?.email || undefined,
       metadata: {
         nom:    customer?.nom    || '',

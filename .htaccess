@@ -1,6 +1,6 @@
 # ================================================================
-#  BLACK V PRESTIGE — Configuration Apache (Hostinger)
-#  Domaine final : https://www.blackvprestige.com
+#  MONTCLAIR PRESTIGE — Configuration Apache (Hostinger)
+#  Domaine final : https://www.montclairprestige.com
 # ================================================================
 
 RewriteEngine On
@@ -9,7 +9,7 @@ RewriteEngine On
 RewriteCond %{HTTPS} off
 RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
 
-# ── 2. Forcer le www (forme canonique choisie : www.blackvprestige.com) ──
+# ── 2. Forcer le www (forme canonique choisie : www.montclairprestige.com) ──
 RewriteCond %{HTTP_HOST} !^www\. [NC]
 RewriteRule ^(.*)$ https://www.%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
 

@@ -1,5 +1,5 @@
 // ================================================================
-//  BLACK V PRESTIGE — FONCTION SERVERLESS VERCEL (FORMULAIRE CONTACT)
+//  MONTCLAIR PRESTIGE — FONCTION SERVERLESS VERCEL (FORMULAIRE CONTACT)
 // ================================================================
 //  Envoie le contenu du formulaire de contact par email via Resend
 //  (https://resend.com), sans exposer de clé côté client.
@@ -17,8 +17,8 @@ const ALLOWED_ORIGINS = [
   'http://127.0.0.1:5500',
   'http://127.0.0.1:8080',
   'https://antonyevo.github.io',
-  'https://www.blackvprestige.com',
-  'https://blackvprestige.com'
+  'https://www.montclairprestige.com',
+  'https://montclairprestige.com'
 ];
 
 function esc(s) {
@@ -66,7 +66,7 @@ module.exports = async (req, res) => {
     }
 
     const html = `
-      <h2>Nouveau message depuis le site Black V Prestige</h2>
+      <h2>Nouveau message depuis le site Montclair Prestige</h2>
       <p><strong>Nom :</strong> ${esc(prenom)} ${esc(nom)}</p>
       <p><strong>Email :</strong> ${esc(email)}</p>
       <p><strong>Téléphone :</strong> ${esc(tel) || 'Non renseigné'}</p>
@@ -82,10 +82,10 @@ module.exports = async (req, res) => {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        from: 'Black V Prestige <onboarding@resend.dev>',
+        from: 'Montclair Prestige <onboarding@resend.dev>',
         to: [DEST_EMAIL],
         reply_to: email,
-        subject: `Nouveau message — ${sujet || 'Site Black V Prestige'}`,
+        subject: `Nouveau message — ${sujet || 'Site Montclair Prestige'}`,
         html
       })
     });

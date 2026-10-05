@@ -1,5 +1,5 @@
 // ================================================================
-//  BLACK V PRESTIGE — FONCTION SERVERLESS VERCEL
+//  MONTCLAIR PRESTIGE — FONCTION SERVERLESS VERCEL
 //  FORMULAIRE "APPORTEUR D'AFFAIRES"
 // ================================================================
 //  Envoie la demande (+ pièce jointe CSV éventuelle) par email via
@@ -15,8 +15,8 @@ const ALLOWED_ORIGINS = [
   'http://127.0.0.1:5500',
   'http://127.0.0.1:8080',
   'https://antonyevo.github.io',
-  'https://www.blackvprestige.com',
-  'https://blackvprestige.com'
+  'https://www.montclairprestige.com',
+  'https://montclairprestige.com'
 ];
 
 function esc(s) {
@@ -99,7 +99,7 @@ module.exports = async (req, res) => {
     `;
 
     const payload = {
-      from: 'Black V Prestige <onboarding@resend.dev>',
+      from: 'Montclair Prestige <onboarding@resend.dev>',
       to: [DEST_EMAIL],
       reply_to: email,
       subject: `Nouvel apporteur d'affaires — ${prenom} ${nom}`,

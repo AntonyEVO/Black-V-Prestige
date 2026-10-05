@@ -1,5 +1,5 @@
 // ================================================================
-//  BLACK V PRESTIGE — FONCTION SERVERLESS VERCEL
+//  MONTCLAIR PRESTIGE — FONCTION SERVERLESS VERCEL
 //  NOTIFICATION DE RÉSERVATION PAYÉE
 // ================================================================
 //  Appelée après un paiement Stripe réussi (reservation.html).
@@ -17,8 +17,8 @@ const ALLOWED_ORIGINS = [
   'http://127.0.0.1:5500',
   'http://127.0.0.1:8080',
   'https://antonyevo.github.io',
-  'https://www.blackvprestige.com',
-  'https://blackvprestige.com'
+  'https://www.montclairprestige.com',
+  'https://montclairprestige.com'
 ];
 
 function esc(s) {
@@ -92,7 +92,7 @@ module.exports = async (req, res) => {
     `;
 
     const internalHtml = `
-      <h2>Nouvelle réservation payée — Black V Prestige</h2>
+      <h2>Nouvelle réservation payée — Montclair Prestige</h2>
       <p><strong>Client :</strong> ${esc(prenom)} ${esc(nom)}</p>
       <p><strong>Email :</strong> ${esc(email)}</p>
       <p><strong>Téléphone :</strong> ${esc(tel) || 'Non renseigné'}</p>
@@ -108,22 +108,22 @@ module.exports = async (req, res) => {
       <p>Nous avons bien reçu votre paiement. Voici le récapitulatif de votre course :</p>
       ${detailsHtml}
       <p>Votre chauffeur sera à l'heure. Pour toute question, contactez-nous au +33 6 85 86 68 90 ou à blackvprestige@gmail.com.</p>
-      <p>Merci de votre confiance,<br>L'équipe Black V Prestige</p>
+      <p>Merci de votre confiance,<br>L'équipe Montclair Prestige</p>
     `;
 
     const results = await Promise.allSettled([
       sendEmail({
-        from: 'Black V Prestige <onboarding@resend.dev>',
+        from: 'Montclair Prestige <onboarding@resend.dev>',
         to: [DEST_EMAIL],
         reply_to: email,
         subject: `Nouvelle réservation payée — ${prenom} ${nom}`,
         html: internalHtml
       }),
       sendEmail({
-        from: 'Black V Prestige <onboarding@resend.dev>',
+        from: 'Montclair Prestige <onboarding@resend.dev>',
         to: [email],
         reply_to: DEST_EMAIL,
-        subject: 'Votre réservation Black V Prestige est confirmée',
+        subject: 'Votre réservation Montclair Prestige est confirmée',
         html: clientHtml
       })
     ]);

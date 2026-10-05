@@ -1,5 +1,5 @@
 /* ================================================================
-   BLACK V PRESTIGE — FORMULAIRE DE CONTACT
+   MONTCLAIR PRESTIGE — FORMULAIRE DE CONTACT
    Envoie le formulaire vers api/send-contact.js (fonction serverless
    Vercel) qui relaie le message par email via Resend.
    ================================================================ */

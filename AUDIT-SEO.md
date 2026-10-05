@@ -1,4 +1,4 @@
-# Audit SEO — Black V Prestige
+# Audit SEO — Montclair Prestige
 
 Date de l'audit : 2026-07-26
 Périmètre : 11 pages HTML statiques + `robots.txt` + `sitemap.xml`.
@@ -10,17 +10,17 @@ Périmètre : 11 pages HTML statiques + `robots.txt` + `sitemap.xml`.
 
 | Page | `<title>` (longueur) | Meta description (longueur) | Canonical |
 |---|---|---|---|
-| `index.html` | "Black V Prestige — Chauffeur Privé Haut de Gamme \| France Entière 24h/24" (**76 car., trop long**) | 218 car. (**trop long**) | ✅ `https://www.blackvprestige.fr/` (⚠️ **.fr**) |
-| `services.html` | "Services — Black V Prestige \| Chauffeur Privé Haut de Gamme" (62 car., limite haute) | 188 car. (**trop long**) | ❌ absent |
-| `experience.html` | "L'Expérience — Black V Prestige \| Chauffeur Privé Premium" (61 car., limite haute) | 140 car. (OK) | ❌ absent |
-| `notre-flotte.html` | "Notre Flotte — Mercedes Classe V \| Black V Prestige" (53 car., OK) | 171 car. (légèrement long) | ✅ `https://www.blackvprestige.fr/notre-flotte/` (⚠️ **.fr**, et le slug `/notre-flotte/` ne correspond pas au vrai chemin `/notre-flotte.html`) |
-| `evenements-partenaires.html` | "Événements & Partenaires — Black V Prestige" (47 car., un peu court, pas de mot-clé métier) | 179 car. (**trop long**) | ❌ absent |
-| `a-propos.html` | "À propos — Black V Prestige \| Chauffeurs Privés Haut de Gamme" (65 car., **trop long**) | 177 car. (**trop long**) | ❌ absent |
-| `contact.html` | "Contact — Black V Prestige \| Chauffeur Privé 24h/24" (54 car., OK) | 141 car. (OK) | ❌ absent |
-| `reservation.html` | "Réservation en ligne — Black V Prestige" (42 car., un peu court) | 170 car. (légèrement long) | ❌ absent |
-| `apporteur-affaires.html` | "Apporteur d'affaires — Black V Prestige \| Programme de commission" (67 car., **trop long**) | 163 car. (légèrement long) | ❌ absent |
-| `mentions-legales.html` | "Mentions légales — Black V Prestige" (38 car., court — acceptable pour une page légale) | 84 car. (court — acceptable) | ❌ absent |
-| `politique-confidentialite.html` | "Politique de confidentialité — Black V Prestige" (50 car., OK) | 90 car. (court — acceptable) | ❌ absent |
+| `index.html` | "Montclair Prestige — Chauffeur Privé Haut de Gamme \| France Entière 24h/24" (**76 car., trop long**) | 218 car. (**trop long**) | ✅ `https://www.blackvprestige.fr/` (⚠️ **.fr**) |
+| `services.html` | "Services — Montclair Prestige \| Chauffeur Privé Haut de Gamme" (62 car., limite haute) | 188 car. (**trop long**) | ❌ absent |
+| `experience.html` | "L'Expérience — Montclair Prestige \| Chauffeur Privé Premium" (61 car., limite haute) | 140 car. (OK) | ❌ absent |
+| `notre-flotte.html` | "Notre Flotte — Mercedes Classe V \| Montclair Prestige" (53 car., OK) | 171 car. (légèrement long) | ✅ `https://www.blackvprestige.fr/notre-flotte/` (⚠️ **.fr**, et le slug `/notre-flotte/` ne correspond pas au vrai chemin `/notre-flotte.html`) |
+| `evenements-partenaires.html` | "Événements & Partenaires — Montclair Prestige" (47 car., un peu court, pas de mot-clé métier) | 179 car. (**trop long**) | ❌ absent |
+| `a-propos.html` | "À propos — Montclair Prestige \| Chauffeurs Privés Haut de Gamme" (65 car., **trop long**) | 177 car. (**trop long**) | ❌ absent |
+| `contact.html` | "Contact — Montclair Prestige \| Chauffeur Privé 24h/24" (54 car., OK) | 141 car. (OK) | ❌ absent |
+| `reservation.html` | "Réservation en ligne — Montclair Prestige" (42 car., un peu court) | 170 car. (légèrement long) | ❌ absent |
+| `apporteur-affaires.html` | "Apporteur d'affaires — Montclair Prestige \| Programme de commission" (67 car., **trop long**) | 163 car. (légèrement long) | ❌ absent |
+| `mentions-legales.html` | "Mentions légales — Montclair Prestige" (38 car., court — acceptable pour une page légale) | 84 car. (court — acceptable) | ❌ absent |
+| `politique-confidentialite.html` | "Politique de confidentialité — Montclair Prestige" (50 car., OK) | 90 car. (court — acceptable) | ❌ absent |
 
 **Constat :** seules 2 pages sur 11 ont une balise canonical, et les deux pointent vers `.fr` (domaine final = `.com`). Les titres et meta descriptions sont tous **uniques** (pas de duplication), ce qui est déjà bon, mais plusieurs dépassent les longueurs recommandées (title >60, description >160).
 
@@ -120,7 +120,7 @@ Détail complet (page, emplacement, suggestion) à produire dans `IMAGES-A-REMPL
 
 - **Email** : `blackvprestige@gmail.com` utilisé partout (header, footer, contact, JSON-LD futur) — à remplacer par une adresse pro une fois créée sur Hostinger.
 - **Réseaux sociaux** : les 3 icônes du footer (Instagram, LinkedIn, Facebook) ont toutes `href="#"` — aucun vrai lien, présent identiquement sur les 11 pages (même bloc de footer dupliqué).
-- **Copyright** : `© 2024 Black V Prestige` sur les 11 pages — année à mettre à jour.
+- **Copyright** : `© 2024 Montclair Prestige` sur les 11 pages — année à mettre à jour.
 - **Mentions légales** : le fichier contient déjà, en placeholders explicites : `[Numéro SIRET à compléter]` et `[Nom de l'hébergeur — à compléter]` — informations jamais renseignées, à fournir.
 - **Ciblage national** : 39 occurrences de "France entière" / "partout en France" / "toute la France" réparties sur les 11 pages (le plus dense : `index.html` ×10, `notre-flotte.html` ×9). Confirme l'ampleur du travail de repositionnement local prévu en Phase 2.
 - **Témoignages dupliqués** : aucune duplication de témoignage trouvée dans `index.html` lors de cette passe (le point signalé dans le brief comme "mineur" n'a pas été confirmé — à revérifier plus finement si vous voulez, mais rien d'évident détecté).

@@ -1,7 +1,7 @@
 {
-  "name": "bvp-stripe-api",
+  "name": "montclair-prestige-api",
   "version": "1.0.0",
-  "description": "Fonction serverless Vercel — paiement Stripe pour Black V Prestige",
+  "description": "Fonction serverless Vercel — paiement Stripe pour Montclair Prestige",
   "dependencies": {
     "stripe": "^14.21.0"
   }

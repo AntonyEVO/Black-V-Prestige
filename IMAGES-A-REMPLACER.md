@@ -1,4 +1,4 @@
-# Images à remplacer — Black V Prestige
+# Images à remplacer — Montclair Prestige
 
 Ce fichier liste toutes les images provenant d'une banque d'images (Unsplash) encore présentes sur le site. Aucune de ces images n'a été téléchargée ou modifiée dans le cadre du chantier SEO — l'objectif est de les remplacer par de **vraies photos** de la flotte, des chauffeurs ou des lieux réels, au fur et à mesure qu'elles seront fournies.
 
@@ -9,9 +9,9 @@ Ce fichier liste toutes les images provenant d'une banque d'images (Unsplash) en
 ## 1. Portrait / chauffeur en action
 **Photo Unsplash :** `photo-1620064856565-b5efac6e14ca`
 **Utilisée sur :**
-- `index.html` (ligne 231) — section "Pourquoi Black V Prestige", alt="Chauffeur professionnel Black V Prestige"
-- `experience.html` (ligne 182) — alt="Chauffeur professionnel Black V Prestige"
-- `a-propos.html` (ligne 94) — section "Notre histoire", alt="Chauffeur Black V Prestige"
+- `index.html` (ligne 231) — section "Pourquoi Montclair Prestige", alt="Chauffeur professionnel Montclair Prestige"
+- `experience.html` (ligne 182) — alt="Chauffeur professionnel Montclair Prestige"
+- `a-propos.html` (ligne 94) — section "Notre histoire", alt="Chauffeur Montclair Prestige"
 
 **Suggestion :** une vraie photo de l'un des 2 chauffeurs (portrait posé ou en situation, tenue de service), si possible avec la Mercedes Classe V ou la Tesla en arrière-plan. C'est l'image la plus réutilisée du site (3 emplacements) — la remplacer en priorité.
 

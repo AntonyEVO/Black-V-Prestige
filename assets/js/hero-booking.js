@@ -1,5 +1,5 @@
 /* ================================================================
-   BLACK V PRESTIGE — WIDGET DE RÉSERVATION RAPIDE (BANNIÈRE ACCUEIL)
+   MONTCLAIR PRESTIGE — WIDGET DE RÉSERVATION RAPIDE (BANNIÈRE ACCUEIL)
    Autocomplete via la Base Adresse Nationale (gouv.fr) + Nominatim en
    complément, puis transmission des données à la page reservation.html
    qui calcule l'itinéraire et pré-remplit l'étape 1 du parcours complet.

@@ -1,5 +1,5 @@
 /**
- * Black V Prestige — Système de traduction multi-langue v2
+ * Montclair Prestige — Système de traduction multi-langue v2
  * Méthode : cookie "googtrans" + rechargement (standard Google Translate)
  * Langues : FR · EN · AR · ES · DE · IT · PT · RU · ZH
  */

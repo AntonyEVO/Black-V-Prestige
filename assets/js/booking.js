@@ -1,5 +1,5 @@
 /* ================================================================
-   BLACK V PRESTIGE — MOTEUR DE RÉSERVATION & PAIEMENT
+   MONTCLAIR PRESTIGE — MOTEUR DE RÉSERVATION & PAIEMENT
    ================================================================
    APIs gratuites utilisées (aucune clé requise) :
      • Base Adresse Nationale (api-adresse.data.gouv.fr) — géocodage
@@ -550,7 +550,7 @@ document.getElementById('btn-pay').addEventListener('click', async () => {
       body: JSON.stringify({
         from:        { lat: booking.from.lat, lon: booking.from.lon },
         to:          { lat: booking.to.lat,   lon: booking.to.lon   },
-        description: `Black V Prestige — ${booking.from.label} → ${booking.to.label}`,
+        description: `Montclair Prestige — ${booking.from.label} → ${booking.to.label}`,
         customer:    { nom: booking.nom, prenom: booking.prenom, email: booking.email, tel: booking.tel }
       })
     });
@@ -575,7 +575,7 @@ document.getElementById('btn-pay').addEventListener('click', async () => {
       showSuccess(false);
       notifyBooking(paymentIntent.id);
     } else {
-      throw new Error('Statut inattendu. Veuillez contacter Black V Prestige.');
+      throw new Error('Statut inattendu. Veuillez contacter Montclair Prestige.');
     }
   } catch (e) {
     errEl.textContent = e.message;

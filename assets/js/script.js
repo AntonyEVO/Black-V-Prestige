@@ -1,5 +1,5 @@
 /* ============================================================
-   BLACK V PRESTIGE — JAVASCRIPT
+   MONTCLAIR PRESTIGE — JAVASCRIPT
    ============================================================ */
 
 document.addEventListener('DOMContentLoaded', () => {
