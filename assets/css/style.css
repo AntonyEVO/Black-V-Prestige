@@ -289,6 +289,8 @@ input, textarea, select { font-family: var(--font-sans); font-size: 14px; outlin
 }
 .navbar__link:hover, .navbar__link.active { color: var(--white); }
 .navbar__link:hover::after, .navbar__link.active::after { width: 100%; }
+.navbar__link--winter { display: inline-flex; align-items: center; gap: 5px; }
+.navbar__link--winter svg { width: 12px; height: 12px; stroke: currentColor; fill: none; stroke-width: 1.5; }
 
 .navbar__cta {
   background: var(--white) !important;

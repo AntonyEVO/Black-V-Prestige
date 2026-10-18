@@ -52,8 +52,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
   <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/hiver.css">
 </head>
-<body>
+<body class="winter-theme">
 
 <!-- ============================================================
      NAVIGATION
@@ -76,6 +77,10 @@
       </div>
       <a href="notre-flotte.html"                  class="navbar__link">Notre Flotte</a>
       <a href="evenements-partenaires.html"    class="navbar__link">Événements</a>
+      <a href="transferts-hiver-alpes-suisse.html" class="navbar__link navbar__link--winter">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2v20M2 7l20 10M22 7L2 17M5 4l3 3M16 17l3 3M19 4l-3 3M8 17l-3 3" stroke-linecap="round"/></svg>
+        Hiver
+      </a>
       <a href="a-propos.html"                  class="navbar__link">À propos</a>
       <a href="contact.html"                   class="navbar__link">Contact</a>
     </div>
@@ -97,6 +102,7 @@
     <a href="experience.html" class="mobile-menu__link mobile-menu__link--sub">L'Expérience</a>
     <a href="notre-flotte.html"               class="mobile-menu__link">Notre Flotte</a>
     <a href="evenements-partenaires.html" class="mobile-menu__link">Événements</a>
+    <a href="transferts-hiver-alpes-suisse.html" class="mobile-menu__link">❄ Hiver — Alpes &amp; Suisse</a>
     <a href="apporteur-affaires.html"     class="mobile-menu__link">Apporteur d'affaires</a>
     <a href="a-propos.html"               class="mobile-menu__link">À propos</a>
     <a href="contact.html"                class="mobile-menu__link">Contact</a>
@@ -201,6 +207,38 @@
     <p class="hero2__hint" id="hero-hint">Merci de renseigner le départ, l'arrivée, la date et l'heure.</p>
   </div>
 
+</section>
+
+<!-- ============================================================
+     SÉLECTEUR D'UNIVERS — Côte d'Azur / Hiver
+     ============================================================ -->
+<section class="universe-select">
+  <div class="universe-select__grid">
+    <a href="#experience" class="universe-card universe-card--azur reveal">
+      <div class="universe-card__bg" aria-hidden="true">
+        <img src="assets/images/fleet/mercedes-classe-v-saint-tropez-golden-hour.jpg" alt="" loading="lazy">
+      </div>
+      <div class="universe-card__overlay" aria-hidden="true"></div>
+      <div class="universe-card__content">
+        <span class="universe-card__eyebrow">Toute l'année</span>
+        <h2 class="universe-card__title">Côte d'Azur</h2>
+        <p class="universe-card__text">Sainte-Maxime, Saint-Tropez, Cannes, Nice, Monaco — notre service historique de chauffeur privé.</p>
+        <span class="universe-card__cta">Découvrir <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      </div>
+    </a>
+    <a href="transferts-hiver-alpes-suisse.html" class="universe-card universe-card--hiver reveal">
+      <div class="universe-card__bg" aria-hidden="true">
+        <img src="https://images.unsplash.com/photo-1491555103944-7c647fd857e6?auto=format&fit=crop&w=1000&q=75" alt="" loading="lazy">
+      </div>
+      <div class="universe-card__overlay" aria-hidden="true"></div>
+      <div class="universe-card__content">
+        <span class="universe-card__eyebrow">Nouveau — Saison hiver</span>
+        <h2 class="universe-card__title">Alpes &amp; Suisse</h2>
+        <p class="universe-card__text">Courchevel, Megève, Genève, Saint-Moritz... un service dédié aux hôtels, conciergeries et stations de ski.</p>
+        <span class="universe-card__cta">Découvrir <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      </div>
+    </a>
+  </div>
 </section>
 
 <!-- ============================================================
