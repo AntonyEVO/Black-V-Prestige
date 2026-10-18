@@ -64,13 +64,25 @@
 .winter-switch-back svg { width: 13px; height: 13px; stroke: currentColor; fill: none; stroke-width: 1.5; }
 
 /* ============================================================
-   SÉLECTEUR D'UNIVERS — section ajoutée sur la page d'accueil
+   ÉCRAN D'ACCUEIL — SÉLECTEUR D'UNIVERS (gate plein écran)
    ============================================================ */
-.universe-select { padding: 0; }
-.universe-select__grid { display: grid; grid-template-columns: 1fr 1fr; min-height: 420px; }
+.universe-gate {
+  position: fixed; inset: 0; z-index: 10000;
+  background: var(--black-deep);
+  display: flex; flex-direction: column;
+  padding: 36px 0 0;
+  opacity: 1; transition: opacity 0.5s ease;
+}
+html.universe-chosen .universe-gate { opacity: 0; pointer-events: none; }
+.universe-gate__brand { text-align: center; margin-bottom: 20px; }
+.universe-gate__logo-title { display: block; font-family: var(--font-serif); font-size: 1.1rem; font-weight: 500; letter-spacing: 0.06em; color: var(--white); }
+.universe-gate__logo-subtitle { display: block; font-size: 0.5rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--silver); margin-top: 4px; }
+.universe-gate__intro { text-align: center; margin-bottom: 28px; }
+.universe-gate__title { font-family: var(--font-serif); font-size: clamp(1.3rem, 2.6vw, 1.8rem); font-weight: 500; color: var(--white); margin-top: 8px; }
+.universe-gate__grid { flex: 1; display: grid; grid-template-columns: 1fr 1fr; }
 .universe-card {
   position: relative; overflow: hidden; display: flex; align-items: flex-end;
-  padding: 44px; min-height: 420px; text-decoration: none;
+  padding: 44px; text-decoration: none;
 }
 .universe-card__bg { position: absolute; inset: 0; z-index: 0; }
 .universe-card__bg img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 1.2s cubic-bezier(.16,1,.3,1); }
@@ -91,8 +103,9 @@
 .universe-card:hover .universe-card__cta svg { transform: translateX(4px); }
 
 @media (max-width: 860px) {
-  .universe-select__grid { grid-template-columns: 1fr; }
-  .universe-card { min-height: 320px; padding: 32px; }
+  .universe-gate { overflow-y: auto; }
+  .universe-gate__grid { grid-template-columns: 1fr; }
+  .universe-card { min-height: 280px; padding: 32px; }
 }
 
 /* ============================================================
